@@ -1,0 +1,24 @@
+﻿<li class="menu-item  menu-item-submenu menu-item-rel" data-menu-toggle="click" aria-haspopup="true">
+    <a href="javascript:;" class="menu-link menu-toggle">
+        <span class="menu-text">مدیریت سایت</span><i class="menu-arrow"></i>
+    </a>
+    <div class="menu-submenu menu-submenu-classic menu-submenu-left">
+        <ul class="menu-subnav">
+            <li class="menu-item " aria-haspopup="true">
+                <a asp-controller="UsersManager" asp-action="Index" asp-area="@AreaConstants.IdentityArea" class="menu-link ">
+                    <span class="menu-text">مدیریت کاربران</span><span class="menu-desc"></span>
+                </a>
+            </li>
+            <li class="menu-item " aria-haspopup="true">
+                <a asp-controller="RolesManager" asp-action="Index" asp-area="@AreaConstants.IdentityArea" class="menu-link ">
+                    <span class="menu-text"> مدیریت نقش‌های سیستم</span><span class="menu-desc"></span>
+                </a>
+            </li>
+            <li class="menu-item " aria-haspopup="true">
+                <a asp-controller="SystemLog" asp-action="Index" asp-area="@AreaConstants.IdentityArea" class="menu-link ">
+                    <span class="menu-text"> گزارش رخ‌دادهای سیستم</span><span class="menu-desc"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</li>

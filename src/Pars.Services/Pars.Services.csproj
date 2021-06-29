@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <NoWarn>RCS1090</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Pars.Common\Pars.Common.csproj" />
+    <ProjectReference Include="..\Pars.DataLayer\Pars.DataLayer.csproj" />
+    <ProjectReference Include="..\Pars.Entities\Pars.Entities.csproj" />
+    <ProjectReference Include="..\Pars.ViewModels\Pars.ViewModels.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DNTCommon.Web.Core" Version="2.9.2" />
+    <PackageReference Include="Microsoft.Extensions.Caching.SqlServer" Version="5.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
+  </ItemGroup>
+</Project>

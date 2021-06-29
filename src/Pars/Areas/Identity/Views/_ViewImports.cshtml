@@ -1,0 +1,24 @@
+﻿@using Pars.Areas.Identity
+@using Pars.Common.IdentityToolkit
+@using Pars.Common.PersianToolkit
+@using Pars.Entities.Identity
+@using Pars.Services.Contracts.Identity
+@using Pars.Services.Identity
+@using Pars.ViewModels.Identity
+@using Pars.ViewModels.Identity.Emails
+@using Pars.ViewModels.Identity.Settings
+@using Microsoft.AspNetCore.Routing
+@using Microsoft.Extensions.Options
+@using System.Globalization
+@using System.Threading.Tasks
+@using System.Net
+@using DNTPersianUtils.Core
+@using Pars.DataLayer.Context
+@using Pars.Entities.AuditableEntity
+
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, DNTCaptcha.Core
+@addTagHelper *, DNTBreadCrumb.Core
+@addTagHelper *, cloudscribe.Web.Pagination
+@addTagHelper *, Pars

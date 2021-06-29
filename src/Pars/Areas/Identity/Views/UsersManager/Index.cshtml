@@ -1,0 +1,17 @@
+@model PagedUsersListViewModel
+
+@{
+    ViewData["Title"] = "مدیریت کاربران";
+ }
+
+<div class="card mt-5">
+    <div class="card-header">
+        <h5 class="card-title">@ViewData["Title"]</h5>
+    </div>
+    <div class="card-body" id="gridcontainer">
+        <partial name="_UsersList" model="Model" />
+    </div>
+    <footer class="card-footer">
+        <a class="btn btn-success btn-sm" asp-action="Index" asp-controller="Register">افزودن یک کاربر جدید</a>
+    </footer>
+</div>
