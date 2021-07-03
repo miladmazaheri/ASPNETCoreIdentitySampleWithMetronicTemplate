@@ -1,88 +1,302 @@
 @model LoginViewModel
 
 @{
+    Layout = null;
     ViewData["Title"] = "ورود";
+
 }
+<!DOCTYPE html>
+<html direction="rtl" dir="rtl" style="direction: rtl">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <meta name="description" content="لاگین page example" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <link href="~/metronic/assets/css/pages/login/classic/login-3.rtl.css?v=7.0.6" rel="stylesheet" type="text/css" />
+    <link href="~/metronic/assets/plugins/global/plugins.bundle.rtl.css?v=7.0.6" rel="stylesheet" type="text/css" />
+    <link href="~/metronic/assets/plugins/custom/prismjs/prismjs.bundle.rtl.css?v=7.0.6" rel="stylesheet" type="text/css" />
+    <link href="~/metronic/assets/css/style.bundle.rtl.css?v=7.0.6" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="~/metronic/assets/media/logos/favicon.ico" />
+
+</head>
+<body id="kt_body" style="background-image: url(/metronic/assets/media/bg/bg-1.jpg); background-size: 100%!important;" class="quick-panel-right demo-panel-right offcanvas-right header-fixed subheader-enabled page-loading">
+
+    <div class="d-flex flex-column flex-root">
+        <!--begin::لاگین-->
+        <div class="login login-3 login-signin-on d-flex flex-row-fluid" id="kt_login">
+            <div class="d-flex flex-center bgi-size-cover bgi-no-repeat flex-row-fluid" style="background-image: url(/metronic/assets/media/bg/bg-1.jpg);">
+                <div class="login-form text-center text-white p-7 position-relative overflow-hidden">
+                    <!--begin::لاگین Header-->
+                    <div class="d-flex flex-center mb-15">
+                        <a href="#">
+                            <img src="~/metronic/assets/media/logos/logo-letter-9.png" class="max-h-100px" alt="" />
+                        </a>
+                    </div>
+                    <!--end::لاگین Header-->
+                    <!--begin::لاگین Sign in form-->
+                    <div class="login-signin">
+                        <div class="mb-20">
+                            <h3>ورود به پنل مدیریت</h3>
+                            <p class="opacity-60 font-weight-bold">نام کاربری و کلمه عبور خود را وارد کنید</p>
+                            <partial name="_CustomValidationSummary" />
+                        </div>
+                        <form class="form" id="kt_login_signin_form"
+                              asp-controller="Login"
+                              asp-action="Index"
+                              asp-route-returnurl="@ViewData["ReturnUrl"]"
+                              method="post"
+                              autocomplete="off">
+                            <div class="form-group">
+                                <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8 mb-5" type="text" placeholder="پست الکترونیک" autocomplete="off" asp-for="Username" />
+                                <span asp-validation-for="Username" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8 mb-5" type="password" placeholder="کلمه عبور" asp-for="Password" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="form-group d-flex flex-wrap justify-content-between align-items-center px-8">
+                                <div class="checkbox-inline">
+                                    <label class="checkbox checkbox-outline checkbox-white text-white m-0">
+                                        <input type="checkbox" asp-for="RememberMe" />
+                                        <span></span>
+                                        مرا به خاطر بسپار
+                                    </label>
+                                </div>
+                                <a href="javascript:;" id="kt_login_forgot" class="text-white font-weight-bold">کلمه عبور را فراموش کرده اید؟</a>
+                            </div>
+                            <div class="form-group text-center mt-10">
+                                <button id="kt_login_signin_submit" type="submit" class="btn btn-pill btn-outline-white font-weight-bold opacity-90 px-15 py-3">ورود</button>
+                            </div>
+                        </form>
+                        <div class="mt-10">
+                            <span class="opacity-70 mr-4">
+                                حساب کاربری ندارید؟
+                            </span>
+                            <a href="javascript:;" id="kt_login_signup" class="text-white font-weight-bold">ثبت نام</a>
+                        </div>
+                    </div>
+                    <!--end::لاگین Sign in form-->
+                    <!--begin::لاگین Sign up form-->
+                    <div class="login-signup">
+                        <div class="mb-20">
+                            <h3>ثبت نام</h3>
+                            <p class="opacity-60">برای ایجاد حساب کاربری ، جزئیات خود را وارد کنید</p>
+                        </div>
+                        <form class="form text-center" id="kt_login_signup_form">
+                            <div class="form-group ">
+                                <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8" type="text" placeholder="نام و ناو خانوادگی" name="fullname" />
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8" type="text" placeholder="پست الکترونیک" name="email" autocomplete="off" />
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8" type="password" placeholder="کلمه عبور" name="password" />
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8" type="password" placeholder="تکرار کلمه عبور" name="cpassword" />
+                            </div>
+                            <div class="form-group text-left px-8">
+                                <div class="checkbox-inline">
+                                    <label class="checkbox checkbox-outline checkbox-white text-white m-0">
+                                        <input type="checkbox" name="agree" />
+                                        <span></span>
+                                        می پذیرم <a href="#" class="text-white font-weight-bold ml-1">قوانین و مقررات</a>.
+                                    </label>
+                                </div>
+                                <div class="form-text text-muted text-center"></div>
+                            </div>
+                            <div class="form-group">
+                                <button id="kt_login_signup_submit" class="btn btn-pill btn-outline-white font-weight-bold opacity-90 px-15 py-3 m-2">ثبت نام</button>
+                                <button id="kt_login_signup_cancel" class="btn btn-pill btn-outline-white font-weight-bold opacity-70 px-15 py-3 m-2">لغو</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!--end::لاگین Sign up form-->
+                    <!--begin::لاگین forgot password form-->
+                    <div class="login-forgot">
+                        <div class="mb-20">
+                            <h3>کلمه عبور خود را فراموش کرده اید؟</h3>
+                            <p class="opacity-60">ایمیل تان را وارد کنید تا پسوردتان ریست شود</p>
+                        </div>
+                        <form class="form" id="kt_login_forgot_form">
+                            <div class="form-group mb-10">
+                                <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8" type="text" placeholder="پست الکترونیک" name="email" autocomplete="off" />
+                            </div>
+                            <div class="form-group">
+                                <button id="kt_login_forgot_submit" class="btn btn-pill btn-outline-white font-weight-bold opacity-90 px-15 py-3 m-2">درخواست</button>
+                                <button id="kt_login_forgot_cancel" class="btn btn-pill btn-outline-white font-weight-bold opacity-70 px-15 py-3 m-2">لغو</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!--end::لاگین forgot password form-->
+                </div>
+            </div>
+        </div>
+        <!--end::لاگین-->
+    </div>
+    <!--end::Main-->
 
 
-<div class="card mt-5">
-    <div class="card-header">
-        <h5 class="card-title">@ViewData["Title"]</h5>
+    <script>var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";</script>
+    <!--begin::Global Config(global config for global JS scripts)-->
+    <script>
+        var KTAppSettings = {
+            "breakpoints": {
+                "sm": 576,
+                "md": 768,
+                "lg": 992,
+                "xl": 1200,
+                "xxl": 1200
+            },
+            "colors": {
+                "theme": {
+                    "base": {
+                        "white": "#ffffff",
+                        "primary": "#6993FF",
+                        "secondary": "#E5EAEE",
+                        "success": "#1BC5BD",
+                        "info": "#8950FC",
+                        "warning": "#FFA800",
+                        "danger": "#F64E60",
+                        "light": "#F3F6F9",
+                        "dark": "#212121"
+                    },
+                    "light": {
+                        "white": "#ffffff",
+                        "primary": "#E1E9FF",
+                        "secondary": "#ECF0F3",
+                        "success": "#C9F7F5",
+                        "info": "#EEE5FF",
+                        "warning": "#FFF4DE",
+                        "danger": "#FFE2E5",
+                        "light": "#F3F6F9",
+                        "dark": "#D6D6E0"
+                    },
+                    "inverse": {
+                        "white": "#ffffff",
+                        "primary": "#ffffff",
+                        "secondary": "#212121",
+                        "success": "#ffffff",
+                        "info": "#ffffff",
+                        "warning": "#ffffff",
+                        "danger": "#ffffff",
+                        "light": "#464E5F",
+                        "dark": "#ffffff"
+                    }
+                },
+                "gray": {
+                    "gray-100": "#F3F6F9",
+                    "gray-200": "#ECF0F3",
+                    "gray-300": "#E5EAEE",
+                    "gray-400": "#D6D6E0",
+                    "gray-500": "#B5B5C3",
+                    "gray-600": "#80808F",
+                    "gray-700": "#464E5F",
+                    "gray-800": "#1B283F",
+                    "gray-900": "#212121"
+                }
+            },
+            "font-family": "Poppins"
+        };
+    </script>
+    <!--end::Global Config-->
+    <!--begin::Global تم Bundle(used by all pages)-->
+    <script src="~/metronic/assets/plugins/global/plugins.bundle.js?v=7.0.6"></script>
+    <script src="~/metronic/assets/plugins/custom/prismjs/prismjs.bundle.js?v=7.0.6"></script>
+    <script src="~/metronic/assets/js/scripts.bundle.js?v=7.0.6"></script>
+    <!--end::Global تم Bundle-->
+    <!--begin::Page Scripts(used by this page)-->
+    <script src="~/metronic/assets/js/pages/custom/login/login-general.js?v=7.0.6"></script>
+    <!--end::Page Scripts-->
+</body>
+<!--end::Body-->
+</html>
+
+
+
+
+@*
+    <div class="card mt-5">
+        <div class="card-header">
+            <h5 class="card-title">@ViewData["Title"]</h5>
+        </div>
+        <div class="card-body">
+            <form asp-controller="Login"
+                  asp-action="Index"
+                  asp-route-returnurl="@ViewData["ReturnUrl"]"
+                  method="post"
+                  autocomplete = "off">
+                <partial name="_CustomValidationSummary" />
+                <div class="form-group row">
+                    <label asp-for="Username" class="col-md-2 col-form-label text-md-left"></label>
+                    <div class="col col-md-10">
+                        <div class="input-group">
+                            <span class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </span>
+                            <input asp-for="Username" autocomplete="off" dir="ltr" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Password" class="col-md-2 col-form-label text-md-left"></label>
+                    <div class="col col-md-10">
+                        <div class="input-group">
+                            <span class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-asterisk"></i></span>
+                            </span>
+                            <input asp-for="Password" dir="ltr" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col col-md-2 col-form-label text-md-left">
+                        کد امنیتی
+                    </label>
+                    <div class="col col-md-10">
+                        <dnt-captcha asp-captcha-generator-max="30"
+                                     asp-captcha-generator-min="1"
+                                     asp-captcha-generator-language="Persian"
+                                     asp-captcha-generator-display-mode="SumOfTwoNumbers"
+                                     asp-font-name="Tahoma"
+                                     asp-font-size="20"
+                                     asp-refresh-button-class="fas fa-redo btn-sm"
+                                     asp-fore-color="#333333"
+                                     asp-back-color="#ccc"
+                                     asp-text-box-class="text-box form-control"
+                                     asp-text-box-template="<div class='input-group'><span class='input-group-prepend'><span class='input-group-text'><i class='fas fa-lock'></i></span></span>{0}</div>"
+                                     asp-validation-message-class="text-danger"
+                                     />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="offset-md-2 col-md-10">
+                        <div class="form-check">
+                            <label asp-for="RememberMe" class="form-check-label">
+                                <input class="form-check-input" asp-for="RememberMe" />
+                                @Html.DisplayNameFor(m => m.RememberMe)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="offset-md-2 col-md-10">
+                        <button type="submit" class="btn btn-info col-md-2">ورود</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <footer class="card-footer">
+            <p>
+                <a asp-action="Index" asp-controller="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">ثبت نام</a>
+            </p>
+            <p>
+                <a asp-action="Index" asp-controller="ForgotPassword">کلمه‌ی عبور خود را فراموش کرده‌اید؟</a>
+            </p>
+        </footer>
     </div>
-    <div class="card-body">
-        <form asp-controller="Login"
-              asp-action="Index"
-              asp-route-returnurl="@ViewData["ReturnUrl"]"
-              method="post"
-              autocomplete = "off">
-            <partial name="_CustomValidationSummary" />
-            <div class="form-group row">
-                <label asp-for="Username" class="col-md-2 col-form-label text-md-left"></label>
-                <div class="col col-md-10">
-                    <div class="input-group">
-                        <span class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-user"></i></span>
-                        </span>
-                        <input asp-for="Username" autocomplete="off" dir="ltr" class="form-control" />
-                    </div>
-                    <span asp-validation-for="Username" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label asp-for="Password" class="col-md-2 col-form-label text-md-left"></label>
-                <div class="col col-md-10">
-                    <div class="input-group">
-                        <span class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-asterisk"></i></span>
-                        </span>
-                        <input asp-for="Password" dir="ltr" class="form-control" />
-                    </div>
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col col-md-2 col-form-label text-md-left">
-                    کد امنیتی
-                </label>
-                <div class="col col-md-10">
-                    <dnt-captcha asp-captcha-generator-max="30"
-                                 asp-captcha-generator-min="1"
-                                 asp-captcha-generator-language="Persian"
-                                 asp-captcha-generator-display-mode="SumOfTwoNumbers"
-                                 asp-font-name="Tahoma"
-                                 asp-font-size="20"
-                                 asp-refresh-button-class="fas fa-redo btn-sm"
-                                 asp-fore-color="#333333"
-                                 asp-back-color="#ccc"
-                                 asp-text-box-class="text-box form-control"
-                                 asp-text-box-template="<div class='input-group'><span class='input-group-prepend'><span class='input-group-text'><i class='fas fa-lock'></i></span></span>{0}</div>"
-                                 asp-validation-message-class="text-danger"
-                                 />
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="offset-md-2 col-md-10">
-                    <div class="form-check">
-                        <label asp-for="RememberMe" class="form-check-label">
-                            <input class="form-check-input" asp-for="RememberMe" />
-                            @Html.DisplayNameFor(m => m.RememberMe)
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="offset-md-2 col-md-10">
-                    <button type="submit" class="btn btn-info col-md-2">ورود</button>
-                </div>
-            </div>
-        </form>
-    </div>
-    <footer class="card-footer">
-        <p>
-            <a asp-action="Index" asp-controller="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">ثبت نام</a>
-        </p>
-        <p>
-            <a asp-action="Index" asp-controller="ForgotPassword">کلمه‌ی عبور خود را فراموش کرده‌اید؟</a>
-        </p>
-    </footer>
-</div>
+*@

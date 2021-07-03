@@ -51,34 +51,34 @@ var KTLogin = function() {
 
         $('#kt_login_signin_submit').on('click', function (e) {
             e.preventDefault();
-
-            validation.validate().then(function(status) {
-		        if (status == 'Valid') {
-                    swal.fire({
-		                text: "همه چیز جالب است! اکنون این فرم را ارسال می کنید",
-		                icon: "success",
-		                buttonsStyling: false,
-		                confirmButtonText: "باشه فهمیدم!",
-                        customClass: {
-    						confirmButton: "btn font-weight-bold btn-light-primary"
-    					}
-		            }).then(function() {
-						KTUtil.scrollTop();
-					});
-				} else {
-					swal.fire({
-		                text: "با عرض پوزش ، به نظر می رسد برخی از خطاها شناسایی شده اند ، لطفا دوباره امتحان کنید.",
-		                icon: "error",
-		                buttonsStyling: false,
-		                confirmButtonText: "باشه فهمیدم!",
-                        customClass: {
-    						confirmButton: "btn font-weight-bold btn-light-primary"
-    					}
-		            }).then(function() {
-						KTUtil.scrollTop();
-					});
-				}
-		    });
+            $('#kt_login_signin_form').submit();
+    //        validation.validate().then(function(status) {
+		  //      if (status == 'Valid') {
+    //                swal.fire({
+		  //              text: "همه چیز جالب است! اکنون این فرم را ارسال می کنید",
+		  //              icon: "success",
+		  //              buttonsStyling: false,
+		  //              confirmButtonText: "باشه فهمیدم!",
+    //                    customClass: {
+    //						confirmButton: "btn font-weight-bold btn-light-primary"
+    //					}
+		  //          }).then(function() {
+				//		KTUtil.scrollTop();
+				//	});
+				//} else {
+				//	swal.fire({
+		  //              text: "با عرض پوزش ، به نظر می رسد برخی از خطاها شناسایی شده اند ، لطفا دوباره امتحان کنید.",
+		  //              icon: "error",
+		  //              buttonsStyling: false,
+		  //              confirmButtonText: "باشه فهمیدم!",
+    //                    customClass: {
+    //						confirmButton: "btn font-weight-bold btn-light-primary"
+    //					}
+		  //          }).then(function() {
+				//		KTUtil.scrollTop();
+				//	});
+				//}
+		  //  });
         });
 
         // Handle forgot button

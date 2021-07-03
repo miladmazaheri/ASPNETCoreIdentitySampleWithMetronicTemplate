@@ -45,8 +45,8 @@ namespace Pars.Areas.Identity.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ValidateDNTCaptcha(CaptchaGeneratorLanguage = Language.Persian,
-                            CaptchaGeneratorDisplayMode = DisplayMode.SumOfTwoNumbers)]
+        //[ValidateDNTCaptcha(CaptchaGeneratorLanguage = Language.Persian,
+        //                    CaptchaGeneratorDisplayMode = DisplayMode.SumOfTwoNumbers)]
         public async Task<IActionResult> Index(LoginViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
@@ -77,7 +77,7 @@ namespace Pars.Areas.Identity.Controllers
                                         model.Password,
                                         model.RememberMe,
                                         lockoutOnFailure: true);
-                if (result.Succeeded)
+                if (result.Succeeded || result.RequiresTwoFactor || result.IsLockedOut)
                 {
                     _logger.LogInformation(1, $"{model.Username} logged in.");
                     if (Url.IsLocalUrl(returnUrl))
@@ -87,19 +87,18 @@ namespace Pars.Areas.Identity.Controllers
                     return RedirectToAction(nameof(HomeController.Index), "Home");
                 }
 
-                if (result.RequiresTwoFactor)
-                {
-                    return RedirectToAction(
-                        nameof(TwoFactorController.SendCode),
-                        "TwoFactor",
-                        new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                }
-
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning(2, $"{model.Username} قفل شده‌است.");
-                    return View("~/Areas/Identity/Views/TwoFactor/Lockout.cshtml");
-                }
+                //if (result.RequiresTwoFactor)
+                //{
+                //    return RedirectToAction(
+                //        nameof(TwoFactorController.SendCode),
+                //        "TwoFactor",
+                //        new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                //}
+                //if (result.IsLockedOut)
+                //{
+                //    _logger.LogWarning(2, $"{model.Username} قفل شده‌است.");
+                //    return View("~/Areas/Identity/Views/TwoFactor/Lockout.cshtml");
+                //}
 
                 if (result.IsNotAllowed)
                 {
