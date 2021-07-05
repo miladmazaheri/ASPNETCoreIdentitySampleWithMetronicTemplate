@@ -46,5 +46,8 @@ namespace Pars.ViewModels.Identity
         [Display(Name = "تکرار کلمه‌ی عبور")]
         [Compare(nameof(Password), ErrorMessage = "کلمات عبور وارد شده با هم تطابق ندارند")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "کد معرف")]
+        public string ReferralCode { get; set; }
     }
 }

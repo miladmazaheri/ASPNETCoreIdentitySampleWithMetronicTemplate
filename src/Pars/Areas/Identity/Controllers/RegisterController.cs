@@ -103,8 +103,8 @@ namespace Pars.Areas.Identity.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ValidateDNTCaptcha(CaptchaGeneratorLanguage = DNTCaptcha.Core.Language.Persian,
-                            CaptchaGeneratorDisplayMode = DisplayMode.SumOfTwoNumbers)]
+        //[ValidateDNTCaptcha(CaptchaGeneratorLanguage = DNTCaptcha.Core.Language.Persian,
+        //                    CaptchaGeneratorDisplayMode = DisplayMode.SumOfTwoNumbers)]
         public async Task<IActionResult> Index(RegisterViewModel model)
         {
             if (ModelState.IsValid)

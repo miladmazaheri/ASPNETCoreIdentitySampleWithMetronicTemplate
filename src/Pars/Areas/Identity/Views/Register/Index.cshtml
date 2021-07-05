@@ -1,98 +1,271 @@
 @model RegisterViewModel
 @{
+    Layout = null;
     ViewData["Title"] = "ثبت نام";
 }
+<!DOCTYPE html>
+<html direction="rtl" dir="rtl" style="direction: rtl">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <meta name="description" content="لاگین page example" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-<div class="card mt-5">
-    <div class="card-header">
-        <h5 class="card-title">@ViewData["Title"]</h5>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <link href="~/metronic/assets/css/pages/login/classic/login-3.rtl.css?v=7.0.6" rel="stylesheet" type="text/css" />
+    <link href="~/metronic/assets/plugins/global/plugins.bundle.rtl.css?v=7.0.6" rel="stylesheet" type="text/css" />
+    <link href="~/metronic/assets/plugins/custom/prismjs/prismjs.bundle.rtl.css?v=7.0.6" rel="stylesheet" type="text/css" />
+    <link href="~/metronic/assets/css/style.bundle.rtl.css?v=7.0.6" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="~/metronic/assets/media/logos/favicon.ico" />
+
+</head>
+<body id="kt_body" style="background-image: url(/metronic/assets/media/bg/bg-1.jpg); background-size: 100%!important;" class="quick-panel-right demo-panel-right offcanvas-right header-fixed subheader-enabled page-loading">
+
+    <div class="d-flex flex-column flex-root">
+        <!--begin::لاگین-->
+        <div class="login login-3 login-signin-on d-flex flex-row-fluid" id="kt_login">
+            <div class="d-flex flex-center bgi-size-cover bgi-no-repeat flex-row-fluid" style="background-image: url(/metronic/assets/media/bg/bg-1.jpg);">
+                <div class="login-form text-center text-white p-7 position-relative overflow-hidden">
+                    <!--begin::لاگین Header-->
+                    <div class="d-flex flex-center mb-15">
+                        <a href="#">
+                            <img src="~/metronic/assets/media/logos/logo-letter-9.png" class="max-h-100px" alt="" />
+                        </a>
+                    </div>
+                    <!--end::لاگین Header-->
+                    <!--begin::لاگین Sign up form-->
+                    <div class="login-signin">
+                        <div class="mb-20">
+                            <h3>ثبت نام</h3>
+                            <p class="opacity-60">برای ایجاد حساب کاربری ، جزئیات خود را وارد کنید</p>
+                            <partial name="_CustomValidationSummary" />
+                        </div>
+                        <form class="form text-center" asp-controller="Register"
+                              asp-action="Index"
+                              method="post"
+                              autocomplete="off">
+                            <div class="form-group ">
+                                <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8" type="text" placeholder="نام" asp-for="FirstName" />
+                                <span asp-validation-for="FirstName" class="text-warning"></span>
+                            </div>
+                            <div class="form-group ">
+                                <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8" type="text" placeholder="نام خانوادگی" asp-for="LastName" />
+                                <span asp-validation-for="LastName" class="text-warning"></span>
+                            </div>
+                            <div class="form-group ">
+                                <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8" type="text" placeholder="نام خانوادگی" asp-for="Username" />
+                                <span asp-validation-for="Username" class="text-warning"></span>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8" type="text" placeholder="پست الکترونیک" asp-for="Email" autocomplete="off" />
+                                <span asp-validation-for="Email" class="text-warning"></span>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8" type="password" placeholder="کلمه عبور" asp-for="Password" />
+                                <span asp-validation-for="Password" class="text-warning"></span>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8" type="password" placeholder="تکرار کلمه عبور" asp-for="ConfirmPassword" />
+                                <span asp-validation-for="ConfirmPassword" class="text-warning"></span>
+                            </div>
+                            <div class="form-group ">
+                                <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8" type="text" placeholder="کد معرف" asp-for="ReferralCode" />
+                                <span asp-validation-for="ReferralCode" class="text-warning"></span>
+                            </div>
+                            <div class="form-group text-left px-8">
+                                <div class="checkbox-inline">
+                                    <label class="checkbox checkbox-outline checkbox-white text-white m-0">
+                                        <input type="checkbox" name="agree" />
+                                        <span></span>
+                                        می پذیرم <a href="#" class="text-white font-weight-bold ml-1">قوانین و مقررات</a>.
+                                    </label>
+                                </div>
+                                <div class="form-text text-muted text-center"></div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-pill btn-outline-white font-weight-bold opacity-90 px-15 py-3 m-2">ثبت نام</button>
+                                <a asp-controller="Login" asp-action="Index" class="btn btn-pill btn-outline-white font-weight-bold opacity-70 px-15 py-3 m-2">لغو</a>
+                            </div>
+                        </form>
+                    </div>
+                    <!--end::لاگین Sign up form-->
+                </div>
+            </div>
+        </div>
+        <!--end::لاگین-->
     </div>
-    <div class="card-body">
-        <form asp-controller="Register"
-              asp-action="Index"
-              method="post">
-            <partial name="_CustomValidationSummary" />
-            <div class="form-group row">
-                <label asp-for="FirstName" class="col-md-2 col-form-label text-md-left"></label>
-                <div class="col-md-10">
-                    <input dir="rtl" asp-for="FirstName" class="form-control" />
-                    <span asp-validation-for="FirstName" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label asp-for="LastName" class="col-md-2 col-form-label text-md-left"></label>
-                <div class="col-md-10">
-                    <input dir="rtl" asp-for="LastName" class="form-control" />
-                    <span asp-validation-for="LastName" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label asp-for="Username" class="col-md-2 col-form-label text-md-left"></label>
-                <div class="col-md-10">
-                    <input dir="ltr" asp-for="Username" onblur="triggerRemoteValidation()" class="form-control" />
-                    <span asp-validation-for="Username" class="text-danger"></span>
-                    <span class="optional-label">(جهت لاگین)</span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label asp-for="Email" class="col-md-2 col-form-label text-md-left"></label>
-                <div class="col-md-10">
-                    <input dir="ltr" asp-for="Email" onblur="triggerRemoteValidation()" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label asp-for="Password" class="col-md-2 col-form-label text-md-left"></label>
-                <div class="col-md-10">
-                    <input dir="ltr" asp-for="Password" class="form-control" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label asp-for="ConfirmPassword" class="col-md-2 col-form-label text-md-left"></label>
-                <div class="col-md-10">
-                    <input dir="ltr" asp-for="ConfirmPassword" class="form-control" />
-                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col col-md-2 col-form-label text-md-left">
-                    کد امنیتی
-                </label>
-                <div class="col col-md-10">
-                    <dnt-captcha asp-captcha-generator-max="30"
-                                 asp-captcha-generator-min="1"
-                                 asp-captcha-generator-language="Persian"
-                                 asp-captcha-generator-display-mode="SumOfTwoNumbers"
-                                 asp-font-name="Tahoma"
-                                 asp-font-size="20"
-                                 asp-refresh-button-class="fas fa-redo btn-sm"
-                                 asp-fore-color="#333333"
-                                 asp-back-color="#ccc"
-                                 asp-text-box-class="text-box form-control"
-                                 asp-text-box-template="<div class='input-group'><span class='input-group-prepend'><span class='input-group-text'><i class='fas fa-lock'></i></span></span>{0}</div>"
-                                 asp-validation-message-class="text-danger"
-                                 />
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="offset-md-2 col-md-10">
-                    <button type="submit" class="btn btn-info col-md-2">ثبت نام</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
+    <!--end::Main-->
 
-@section Scripts
-{
-    <script type="text/javascript">
-        function triggerRemoteValidation() {
-            $('#@nameof(RegisterViewModel.Username)').removeData('previousValue');
-            $('form').validate().element('#@nameof(RegisterViewModel.Username)');
 
-            $('#@nameof(RegisterViewModel.Email)').removeData('previousValue');
-            $('form').validate().element('#@nameof(RegisterViewModel.Email)');
-        }
+    <script>var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";</script>
+    <!--begin::Global Config(global config for global JS scripts)-->
+    <script>
+        var KTAppSettings = {
+            "breakpoints": {
+                "sm": 576,
+                "md": 768,
+                "lg": 992,
+                "xl": 1200,
+                "xxl": 1200
+            },
+            "colors": {
+                "theme": {
+                    "base": {
+                        "white": "#ffffff",
+                        "primary": "#6993FF",
+                        "secondary": "#E5EAEE",
+                        "success": "#1BC5BD",
+                        "info": "#8950FC",
+                        "warning": "#FFA800",
+                        "danger": "#F64E60",
+                        "light": "#F3F6F9",
+                        "dark": "#212121"
+                    },
+                    "light": {
+                        "white": "#ffffff",
+                        "primary": "#E1E9FF",
+                        "secondary": "#ECF0F3",
+                        "success": "#C9F7F5",
+                        "info": "#EEE5FF",
+                        "warning": "#FFF4DE",
+                        "danger": "#FFE2E5",
+                        "light": "#F3F6F9",
+                        "dark": "#D6D6E0"
+                    },
+                    "inverse": {
+                        "white": "#ffffff",
+                        "primary": "#ffffff",
+                        "secondary": "#212121",
+                        "success": "#ffffff",
+                        "info": "#ffffff",
+                        "warning": "#ffffff",
+                        "danger": "#ffffff",
+                        "light": "#464E5F",
+                        "dark": "#ffffff"
+                    }
+                },
+                "gray": {
+                    "gray-100": "#F3F6F9",
+                    "gray-200": "#ECF0F3",
+                    "gray-300": "#E5EAEE",
+                    "gray-400": "#D6D6E0",
+                    "gray-500": "#B5B5C3",
+                    "gray-600": "#80808F",
+                    "gray-700": "#464E5F",
+                    "gray-800": "#1B283F",
+                    "gray-900": "#212121"
+                }
+            },
+            "font-family": "Poppins"
+        };
     </script>
-}
+    <!--end::Global Config-->
+    <!--begin::Global تم Bundle(used by all pages)-->
+    <script src="~/metronic/assets/plugins/global/plugins.bundle.js?v=7.0.6"></script>
+    <script src="~/metronic/assets/plugins/custom/prismjs/prismjs.bundle.js?v=7.0.6"></script>
+    <script src="~/metronic/assets/js/scripts.bundle.js?v=7.0.6"></script>
+    <!--end::Global تم Bundle-->
+    <!--begin::Page Scripts(used by this page)-->
+    @*<script src="~/metronic/assets/js/pages/custom/login/login-general.js?v=7.0.6"></script>*@
+    <!--end::Page Scripts-->
+</body>
+<!--end::Body-->
+</html>
+
+
+
+@*
+    <div class="card mt-5">
+        <div class="card-header">
+            <h5 class="card-title">@ViewData["Title"]</h5>
+        </div>
+        <div class="card-body">
+            <form asp-controller="Register"
+                  asp-action="Index"
+                  method="post">
+                <partial name="_CustomValidationSummary" />
+                <div class="form-group row">
+                    <label asp-for="FirstName" class="col-md-2 col-form-label text-md-left"></label>
+                    <div class="col-md-10">
+                        <input dir="rtl" asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-warning"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="LastName" class="col-md-2 col-form-label text-md-left"></label>
+                    <div class="col-md-10">
+                        <input dir="rtl" asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-warning"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Username" class="col-md-2 col-form-label text-md-left"></label>
+                    <div class="col-md-10">
+                        <input dir="ltr" asp-for="Username" onblur="triggerRemoteValidation()" class="form-control" />
+                        <span asp-validation-for="Username" class="text-warning"></span>
+                        <span class="optional-label">(جهت لاگین)</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Email" class="col-md-2 col-form-label text-md-left"></label>
+                    <div class="col-md-10">
+                        <input dir="ltr" asp-for="Email" onblur="triggerRemoteValidation()" class="form-control" />
+                        <span asp-validation-for="Email" class="text-warning"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Password" class="col-md-2 col-form-label text-md-left"></label>
+                    <div class="col-md-10">
+                        <input dir="ltr" asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-warning"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="ConfirmPassword" class="col-md-2 col-form-label text-md-left"></label>
+                    <div class="col-md-10">
+                        <input dir="ltr" asp-for="ConfirmPassword" class="form-control" />
+                        <span asp-validation-for="ConfirmPassword" class="text-warning"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col col-md-2 col-form-label text-md-left">
+                        کد امنیتی
+                    </label>
+                    <div class="col col-md-10">
+                        <dnt-captcha asp-captcha-generator-max="30"
+                                     asp-captcha-generator-min="1"
+                                     asp-captcha-generator-language="Persian"
+                                     asp-captcha-generator-display-mode="SumOfTwoNumbers"
+                                     asp-font-name="Tahoma"
+                                     asp-font-size="20"
+                                     asp-refresh-button-class="fas fa-redo btn-sm"
+                                     asp-fore-color="#333333"
+                                     asp-back-color="#ccc"
+                                     asp-text-box-class="text-box form-control"
+                                     asp-text-box-template="<div class='input-group'><span class='input-group-prepend'><span class='input-group-text'><i class='fas fa-lock'></i></span></span>{0}</div>"
+                                     asp-validation-message-class="text-warning"
+                                     />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="offset-md-2 col-md-10">
+                        <button type="submit" class="btn btn-info col-md-2">ثبت نام</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @section Scripts
+    {
+        <script type="text/javascript">
+            function triggerRemoteValidation() {
+                $('#@nameof(RegisterViewModel.Username)').removeData('previousValue');
+                $('form').validate().element('#@nameof(RegisterViewModel.Username)');
+
+                $('#@nameof(RegisterViewModel.Email)').removeData('previousValue');
+                $('form').validate().element('#@nameof(RegisterViewModel.Email)');
+            }
+        </script>
+    }
+*@
