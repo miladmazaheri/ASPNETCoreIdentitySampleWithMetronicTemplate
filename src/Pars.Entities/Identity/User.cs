@@ -51,6 +51,13 @@ namespace Pars.Entities.Identity
 
         public bool IsActive { get; set; } = true;
 
+        [StringLength(10)]
+        public string UniqueCode { get; set; }
+
+        public int? ReferralUserId { get; set; }
+        public User ReferralUser { get; set; }
+
+
         public virtual ICollection<UserUsedPassword> UserUsedPasswords { get; set; }
 
         public virtual ICollection<UserToken> UserTokens { get; set; }

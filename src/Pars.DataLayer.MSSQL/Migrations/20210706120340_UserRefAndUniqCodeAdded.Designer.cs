@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pars.DataLayer.MSSQL;
 
 namespace Pars.DataLayer.MSSQL.Migrations
 {
     [DbContext(typeof(MsSqlDbContext))]
-    partial class MsSqlDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210706120340_UserRefAndUniqCodeAdded")]
+    partial class UserRefAndUniqCodeAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -385,8 +387,9 @@ namespace Pars.DataLayer.MSSQL.Migrations
                         .HasMaxLength(450)
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("ReferralUserId")
-                        .HasColumnType("int");
+                    b.Property<string>("ReferralCode")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -399,7 +402,7 @@ namespace Pars.DataLayer.MSSQL.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)")
-                        .HasComputedColumnSql("RIGHT('000000'+CAST([Id] AS VARCHAR(20)),6)");
+                        .HasComputedColumnSql("SELECT RIGHT('000000'+CAST([Id] AS VARCHAR(20)),6)");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
@@ -414,8 +417,6 @@ namespace Pars.DataLayer.MSSQL.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.HasIndex("ReferralUserId");
 
                     b.ToTable("AppUsers");
                 });
@@ -722,16 +723,6 @@ namespace Pars.DataLayer.MSSQL.Migrations
                         .IsRequired();
 
                     b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("Pars.Entities.Identity.User", b =>
-                {
-                    b.HasOne("Pars.Entities.Identity.User", "ReferralUser")
-                        .WithMany()
-                        .HasForeignKey("ReferralUserId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("ReferralUser");
                 });
 
             modelBuilder.Entity("Pars.Entities.Identity.UserClaim", b =>
