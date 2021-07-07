@@ -9,16 +9,33 @@ using Pars.ViewModels.Products;
 
 namespace Pars.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     [ApiKey]
     public class ProductController : ControllerBase
     {
-        //[FromHeader] string ApiKey,
         [HttpPut]
-        public async Task UpdateAsync([FromBody] ProductUpdateInput input)
+        public async Task InsertOrUpdateAsync([FromBody] ProductUpdateInput input)
         {
+            //TODO
+        }
 
+        [HttpPut]
+        public async Task BatchInsertOrUpdateAsync([FromBody] List<ProductUpdateInput> input)
+        {
+            //TODO
+        }
+
+        [HttpPut]
+        public async Task UpdateProductWarehousesAsync([FromBody] ProductWarehouseUpdateInput input)
+        {
+            //TODO
+        }
+
+        [HttpPut]
+        public async Task BatchUpdateProductWarehousesAsync([FromBody] List<ProductWarehouseUpdateInput> input)
+        {
+            //TODO
         }
     }
 }
