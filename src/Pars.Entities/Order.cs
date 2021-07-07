@@ -11,6 +11,12 @@ namespace Pars.Entities
 {
     public class Order : IAuditableEntity
     {
+
+        public Order()
+        {
+            OrderItems = new HashSet<OrderItem>();
+            OrderCheckouts = new HashSet<OrderCheckout>();
+        }
         public long Id { get; set; }
         public string Title { get; set; }
         public DateTime OrderDate { get; set; }
@@ -36,6 +42,9 @@ namespace Pars.Entities
 
         public int? ReferralUserId { get; set; }
         public User ReferralUser { get; set; }
+
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
+        public virtual ICollection<OrderCheckout> OrderCheckouts { get; set; }
 
     }
 }

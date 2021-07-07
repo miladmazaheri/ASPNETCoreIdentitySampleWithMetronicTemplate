@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Pars.DataLayer.MSSQL.Migrations
 {
-    public partial class V2020_11_16_1217 : Migration
+    public partial class InitializeMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -105,6 +105,8 @@ namespace Pars.DataLayer.MSSQL.Migrations
                     IsEmailPublic = table.Column<bool>(type: "bit", nullable: false),
                     Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    UniqueCode = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false, computedColumnSql: "RIGHT('000000'+CAST([Id] AS VARCHAR(20)),6)"),
+                    ReferralUserId = table.Column<int>(type: "int", nullable: true),
                     CreatedByBrowserName = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
                     CreatedByIp = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     CreatedByUserId = table.Column<int>(type: "int", nullable: true),
@@ -130,16 +132,22 @@ namespace Pars.DataLayer.MSSQL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AppUsers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AppUsers_AppUsers_ReferralUserId",
+                        column: x => x.ReferralUserId,
+                        principalTable: "AppUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
+                    Picture = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedByBrowserName = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
                     CreatedByIp = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     CreatedByUserId = table.Column<int>(type: "int", nullable: true),
@@ -329,14 +337,101 @@ namespace Pars.DataLayer.MSSQL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    OrderStatus = table.Column<int>(type: "int", nullable: false),
+                    DeliveryDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    EstimateDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    TotalPrice = table.Column<long>(type: "bigint", nullable: false),
+                    DiscountPrice = table.Column<long>(type: "bigint", nullable: false),
+                    FreightCost = table.Column<long>(type: "bigint", nullable: false),
+                    TaxPrice = table.Column<long>(type: "bigint", nullable: false),
+                    PurePrice = table.Column<long>(type: "bigint", nullable: false),
+                    DriverName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
+                    DriverPhoneNumber = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
+                    FreightName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
+                    FreightPhoneNumber = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    ReferralUserId = table.Column<int>(type: "int", nullable: true),
+                    CreatedByBrowserName = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    CreatedByIp = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    CreatedByUserId = table.Column<int>(type: "int", nullable: true),
+                    CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedByBrowserName = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    ModifiedByIp = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    ModifiedByUserId = table.Column<int>(type: "int", nullable: true),
+                    ModifiedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Orders_AppUsers_ReferralUserId",
+                        column: x => x.ReferralUserId,
+                        principalTable: "AppUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Orders_AppUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AppUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Warehouses",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true),
+                    CreatedByBrowserName = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    CreatedByIp = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    CreatedByUserId = table.Column<int>(type: "int", nullable: true),
+                    CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedByBrowserName = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    ModifiedByIp = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    ModifiedByUserId = table.Column<int>(type: "int", nullable: true),
+                    ModifiedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Warehouses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Warehouses_AppUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AppUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,6)", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Price = table.Column<long>(type: "bigint", nullable: false),
+                    Size = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
+                    Code = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
+                    CountInBox = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
+                    Material = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
+                    Usage = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
+                    BranchSize = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
+                    Color = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
+                    Thickness = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
+                    BoxWeight = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
+                    InstallationMethod = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Specification = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Picture = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CategoryId = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
                     CreatedByBrowserName = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
                     CreatedByIp = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     CreatedByUserId = table.Column<int>(type: "int", nullable: true),
@@ -353,6 +448,103 @@ namespace Pars.DataLayer.MSSQL.Migrations
                         name: "FK_Products_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderCheckouts",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Price = table.Column<long>(type: "bigint", nullable: false),
+                    BankName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    ReferenceNumber = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    OrderId = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedByBrowserName = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    CreatedByIp = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    CreatedByUserId = table.Column<int>(type: "int", nullable: true),
+                    CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedByBrowserName = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    ModifiedByIp = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    ModifiedByUserId = table.Column<int>(type: "int", nullable: true),
+                    ModifiedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderCheckouts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OrderCheckouts_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderItems",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderId = table.Column<long>(type: "bigint", nullable: false),
+                    ProductId = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
+                    UnitPrice = table.Column<long>(type: "bigint", nullable: false),
+                    Count = table.Column<int>(type: "int", nullable: false),
+                    Discount = table.Column<long>(type: "bigint", nullable: false),
+                    DiscountPercent = table.Column<int>(type: "int", nullable: false),
+                    TaxPrice = table.Column<long>(type: "bigint", nullable: false),
+                    TotalPrice = table.Column<long>(type: "bigint", nullable: false),
+                    TotalPurePrice = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedByBrowserName = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    CreatedByIp = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    CreatedByUserId = table.Column<int>(type: "int", nullable: true),
+                    CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedByBrowserName = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    ModifiedByIp = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    ModifiedByUserId = table.Column<int>(type: "int", nullable: true),
+                    ModifiedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OrderItems_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_OrderItems_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductWarehouses",
+                columns: table => new
+                {
+                    ProductId = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
+                    WarehouseId = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
+                    Count = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductWarehouses", x => new { x.ProductId, x.WarehouseId });
+                    table.ForeignKey(
+                        name: "FK_ProductWarehouses_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductWarehouses_Warehouses_WarehouseId",
+                        column: x => x.WarehouseId,
+                        principalTable: "Warehouses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -403,6 +595,11 @@ namespace Pars.DataLayer.MSSQL.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AppUsers_ReferralUserId",
+                table: "AppUsers",
+                column: "ReferralUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AppUsers",
                 column: "NormalizedUserName",
@@ -415,9 +612,44 @@ namespace Pars.DataLayer.MSSQL.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_OrderCheckouts_OrderId",
+                table: "OrderCheckouts",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderItems_OrderId",
+                table: "OrderItems",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderItems_ProductId",
+                table: "OrderItems",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_ReferralUserId",
+                table: "Orders",
+                column: "ReferralUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_UserId",
+                table: "Orders",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
                 table: "Products",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductWarehouses_WarehouseId",
+                table: "ProductWarehouses",
+                column: "WarehouseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Warehouses_UserId",
+                table: "Warehouses",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -451,16 +683,31 @@ namespace Pars.DataLayer.MSSQL.Migrations
                 name: "AppUserUsedPasswords");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "OrderCheckouts");
+
+            migrationBuilder.DropTable(
+                name: "OrderItems");
+
+            migrationBuilder.DropTable(
+                name: "ProductWarehouses");
 
             migrationBuilder.DropTable(
                 name: "AppRoles");
 
             migrationBuilder.DropTable(
-                name: "AppUsers");
+                name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "Warehouses");
 
             migrationBuilder.DropTable(
                 name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "AppUsers");
         }
     }
 }

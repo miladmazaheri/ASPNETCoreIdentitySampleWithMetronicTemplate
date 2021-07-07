@@ -26,6 +26,6 @@ namespace Pars.Entities
 
 
         public virtual Category Category { get; set; }
-        public int CategoryId { get; set; }
+        public string CategoryId { get; set; }
     }
 }

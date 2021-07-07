@@ -109,12 +109,25 @@ namespace Pars.Areas.Identity.Controllers
         {
             if (ModelState.IsValid)
             {
+                User refUser = null;
+                if (!string.IsNullOrWhiteSpace(model.ReferralCode))
+                {
+                    refUser = await _userManager.FindByUniqueCodeAsync(model.ReferralCode);
+
+                    if (refUser == null)
+                    {
+                        ModelState.AddModelError(string.Empty, "کد معرف نامعتبر است");
+                        return View(model);
+                    }
+                }
+
                 var user = new User
                 {
                     UserName = model.Username,
                     Email = model.Email,
                     FirstName = model.FirstName,
-                    LastName = model.LastName
+                    LastName = model.LastName,
+                    ReferralUserId = refUser?.Id
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

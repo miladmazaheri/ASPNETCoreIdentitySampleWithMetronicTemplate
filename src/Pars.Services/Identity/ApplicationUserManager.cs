@@ -125,6 +125,11 @@ namespace Pars.Services.Identity
             return result;
         }
 
+        public Task<User> FindByUniqueCodeAsync(string code)
+        {
+            return Users.FirstOrDefaultAsync(x => x.UniqueCode == code);
+        }
+
         #endregion
 
         #region CustomMethods

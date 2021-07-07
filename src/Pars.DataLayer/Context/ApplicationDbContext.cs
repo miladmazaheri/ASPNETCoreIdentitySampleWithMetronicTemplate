@@ -187,6 +187,13 @@ namespace Pars.DataLayer.Context
 
         public virtual DbSet<Category> Categories { set; get; }
         public virtual DbSet<Product> Products { set; get; }
+        public virtual DbSet<Warehouse> Warehouses { set; get; }
+        public virtual DbSet<ProductWarehouse> ProductWarehouses { set; get; }
+        public virtual DbSet<Order> Orders { set; get; }
+        public virtual DbSet<OrderItem> OrderItems { set; get; }
+        public virtual DbSet<OrderCheckout> OrderCheckouts { set; get; }
+
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

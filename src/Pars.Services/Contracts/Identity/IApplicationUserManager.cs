@@ -608,6 +608,7 @@ namespace Pars.Services.Contracts.Identity
         /// The task object containing the results of the asynchronous lookup operation, the user, if any, associated with a normalized value of the specified email address.
         /// </returns>
         Task<User> FindByEmailAsync(string email);
+        Task<User> FindByUniqueCodeAsync(string code);
 
         /// <summary>
         /// Updates the normalized email for the specified <paramref name="user"/>.
