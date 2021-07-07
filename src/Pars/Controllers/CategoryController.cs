@@ -5,35 +5,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Pars.Attributes;
-using Pars.ViewModels.Products;
+using Pars.ViewModels.Categories;
 
 namespace Pars.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
     [ApiKey]
-    public class ProductController : ControllerBase
+    public class CategoryController : ControllerBase
     {
+
         [HttpPut]
-        public async Task InsertOrUpdateAsync([FromBody] ProductUpdateInput input)
+        public async Task InsertOrUpdateAsync([FromBody] CategoryUpdateInput input)
         {
             //TODO
         }
 
         [HttpPut]
-        public async Task BatchInsertOrUpdateAsync([FromBody] List<ProductUpdateInput> input)
-        {
-            //TODO
-        }
-
-        [HttpPut]
-        public async Task UpdateProductWarehousesAsync([FromBody] ProductWarehouseUpdateInput input)
-        {
-            //TODO
-        }
-
-        [HttpPut]
-        public async Task BatchUpdateProductWarehousesAsync([FromBody] List<ProductWarehouseUpdateInput> input)
+        public async Task BatchInsertOrUpdateAsync([FromBody] List<CategoryUpdateInput> input)
         {
             //TODO
         }
