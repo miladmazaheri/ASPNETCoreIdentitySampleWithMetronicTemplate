@@ -9,6 +9,7 @@ using DNTCommon.Web.Core;
 using Microsoft.AspNetCore.StaticFiles.Infrastructure;
 using Pars.Common.WebToolkit;
 using Microsoft.Extensions.Hosting;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace Pars
 {
@@ -39,7 +40,8 @@ namespace Pars
             services.AddCloudscribePagination();
 
             services.AddControllersWithViews();
-            services.AddRazorPages().AddRazorRuntimeCompilation(); 
+            services.AddRazorPages().AddRazorRuntimeCompilation();
+            services.AddSwaggerGen();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -61,6 +63,13 @@ namespace Pars
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.DocExpansion(DocExpansion.List);
+            });
 
             app.UseEndpoints(endpoints =>
             {

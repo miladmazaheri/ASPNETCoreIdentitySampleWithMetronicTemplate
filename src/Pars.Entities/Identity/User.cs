@@ -57,6 +57,9 @@ namespace Pars.Entities.Identity
         public int? ReferralUserId { get; set; }
         public User ReferralUser { get; set; }
 
+        [StringLength(100)]
+        public string ApiKey { get; set; }
+
 
         public virtual ICollection<UserUsedPassword> UserUsedPasswords { get; set; }
 

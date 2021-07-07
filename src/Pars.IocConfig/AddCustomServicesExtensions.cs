@@ -60,6 +60,7 @@ namespace Pars.IocConfig
             services.AddScoped<IUsersPhotoService, UsersPhotoService>();
             services.AddScoped<ISecurityTrimmingService, SecurityTrimmingService>();
             services.AddScoped<IAppLogItemsService, AppLogItemsService>();
+            services.AddScoped<IApiKeyService, ApiKeyService>();
 
             return services;
         }
