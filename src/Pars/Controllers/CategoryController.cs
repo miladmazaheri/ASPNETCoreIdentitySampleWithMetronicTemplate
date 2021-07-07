@@ -30,13 +30,13 @@ namespace Pars.Controllers
         [HttpDelete]
         public async Task DeleteAsync([FromBody] string id)
         {
-
+            //TODO
         }
 
         [HttpDelete]
         public async Task BatchDeleteAsync([FromBody] List<string> ids)
         {
-
+            //TODO
         }
     }
 }

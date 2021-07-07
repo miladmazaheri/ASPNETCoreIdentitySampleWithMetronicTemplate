@@ -6,34 +6,35 @@ using System.Linq;
 using System.Threading.Tasks;
 using Pars.Attributes;
 using Pars.ViewModels.Products;
+using Pars.ViewModels.Warehouses;
 
 namespace Pars.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
     [ApiKey]
-    public class ProductController : ControllerBase
+    public class WarehouseController : ControllerBase
     {
         [HttpPut]
-        public async Task InsertOrUpdateAsync([FromBody] ProductUpdateInput input)
+        public async Task InsertOrUpdateAsync([FromBody] WarehouseUpdateInput input)
         {
             //TODO
         }
 
         [HttpPut]
-        public async Task BatchInsertOrUpdateAsync([FromBody] List<ProductUpdateInput> input)
+        public async Task BatchInsertOrUpdateAsync([FromBody] List<WarehouseUpdateInput> input)
         {
             //TODO
         }
 
         [HttpPut]
-        public async Task UpdateProductWarehousesAsync([FromBody] ProductWarehouseUpdateInput input)
+        public async Task UpdateWarehouseProductsAsync([FromBody] WarehouseProductUpdateInput input)
         {
             //TODO
         }
 
         [HttpPut]
-        public async Task BatchUpdateProductWarehousesAsync([FromBody] List<ProductWarehouseUpdateInput> input)
+        public async Task BatchUpdateWarehouseProductsAsync([FromBody] List<WarehouseProductUpdateInput> input)
         {
             //TODO
         }
