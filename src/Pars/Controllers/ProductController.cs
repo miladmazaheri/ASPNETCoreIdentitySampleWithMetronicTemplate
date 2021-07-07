@@ -14,8 +14,9 @@ namespace Pars.Controllers
     [ApiKey]
     public class ProductController : ControllerBase
     {
+        //[FromHeader] string ApiKey,
         [HttpPut]
-        public async Task UpdateAsync([FromHeader]string ApiKey,[FromBody] ProductUpdateInput input)
+        public async Task UpdateAsync([FromBody] ProductUpdateInput input)
         {
 
         }

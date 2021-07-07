@@ -9,6 +9,7 @@ using DNTCommon.Web.Core;
 using Microsoft.AspNetCore.StaticFiles.Infrastructure;
 using Pars.Common.WebToolkit;
 using Microsoft.Extensions.Hosting;
+using Pars.Attributes;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace Pars
@@ -41,7 +42,11 @@ namespace Pars
 
             services.AddControllersWithViews();
             services.AddRazorPages().AddRazorRuntimeCompilation();
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(c =>
+            {
+                c.OperationFilter<SwaggerRequiredHeaderParameter>();
+                c.DocumentFilter<SwaggerDocFilter>();
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
