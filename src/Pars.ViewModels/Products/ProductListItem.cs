@@ -19,6 +19,8 @@ namespace Pars.ViewModels.Products
         public string Code { get; set; }
         public string CountInBox { get; set; }
 
+        public string Picture { get; set; }
+
         public long Stock { get; set; }
     }
 

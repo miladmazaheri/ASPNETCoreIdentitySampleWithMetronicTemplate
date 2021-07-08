@@ -216,6 +216,7 @@ namespace Pars.Services
                     CountInBox = x.CountInBox,
                     Name = x.Name,
                     Price = x.Price,
+                    Picture = x.Picture,
                     Stock = x.ProductWarehouses.Sum(x => x.Count)
                 }).ToListAsync(),
             };
