@@ -9,6 +9,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Pars.Entities;
+using Pars.Services;
+using Pars.Services.Contracts;
 
 namespace Pars.IocConfig
 {
@@ -61,6 +64,10 @@ namespace Pars.IocConfig
             services.AddScoped<ISecurityTrimmingService, SecurityTrimmingService>();
             services.AddScoped<IAppLogItemsService, AppLogItemsService>();
             services.AddScoped<IApiKeyService, ApiKeyService>();
+            services.AddScoped<IProductService,EfProductService>();
+            services.AddScoped<ICategoryService,EfCategoryService>();
+            services.AddScoped<IWarehouseService,EfWarehouseService>();
+            services.AddScoped<IOrderService, EfOrderService>();
 
             return services;
         }

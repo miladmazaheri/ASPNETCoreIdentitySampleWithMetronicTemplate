@@ -6,7 +6,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Pars.Attributes;
 using Pars.Common.Enums;
+using Pars.Services.Contracts;
 using Pars.ViewModels;
+using Pars.ViewModels.Orders;
 using Pars.ViewModels.Public;
 
 namespace Pars.Controllers
@@ -16,6 +18,13 @@ namespace Pars.Controllers
     [ApiKey]
     public class OrderController : ControllerBase
     {
+        private readonly IOrderService _orderService;
+
+        public OrderController(IOrderService orderService)
+        {
+            _orderService = orderService;
+        }
+
         [HttpGet]
         public ActionResult<List<NameIdViewModel<int>>> GetAllOrderStatus()
         {
@@ -28,15 +37,15 @@ namespace Pars.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<OrderDto>> GetOrderAsync(string orderId)
+        public async Task<ActionResult<OrderDto>> GetAsync([FromQuery] long orderId)
         {
-            return new(new OrderDto());
+            return new ActionResult<OrderDto>(await _orderService.GetAsync(orderId));
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<OrderDto>>> GetAllOrdersAsync(GetOrderInput input)
+        public async Task<ActionResult<List<OrderDto>>> GetAllAsync([FromQuery]SearchOrdersViewModel input)
         {
-            return new(new List<OrderDto>());
+            return new ActionResult<List<OrderDto>> (await _orderService.GetAllAsync(input));
         }
 
     }

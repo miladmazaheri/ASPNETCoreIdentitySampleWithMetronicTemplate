@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Pars.Common.Enums;
-using Pars.Entities.Identity;
 
-namespace Pars.ViewModels
+namespace Pars.ViewModels.Orders
 {
-    public class GetOrderInput
+    public class SearchOrdersViewModel
     {
         public OrderStatus? OrderStatus { get; set; }
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
-        public int Skip { get; set; } = 0;
-        public int Take { get; set; } = 10;
+        public int MaxNumberOfRows { set; get; }
+
+        public int PageNumber { get; set; }
 
     }
     public class OrderDto

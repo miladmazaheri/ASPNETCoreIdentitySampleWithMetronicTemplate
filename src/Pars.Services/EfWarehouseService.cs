@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Pars.DataLayer.Context;
@@ -9,9 +8,8 @@ using Pars.Entities;
 using Pars.Services.Contracts;
 using Pars.ViewModels;
 using Pars.ViewModels.Warehouses;
-using Pars.ViewModels.Warehouses;
 
-namespace Pars.Services.Identity
+namespace Pars.Services
 {
     public class EfWarehouseService : IWarehouseService
     {
