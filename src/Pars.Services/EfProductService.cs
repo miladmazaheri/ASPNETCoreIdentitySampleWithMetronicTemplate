@@ -174,7 +174,7 @@ namespace Pars.Services
             model.Stock = item.ProductWarehouses?.Sum(x => x.Count) ?? 0;
         }
 
-        public async Task<ProductViewModel> GetProductAsync(string id)
+        public async Task<ProductViewModel> GetAsync(string id)
         {
             var item =await _products.Include(x => x.Category).Include(x => x.ProductWarehouses)
                 .FirstAsync(x => x.Id == id);
@@ -183,7 +183,7 @@ namespace Pars.Services
             return res;
         }
 
-        public async Task<PagedListViewModel<ProductListItemViewModel>> GetAllProductsAsync(SearchProductsViewModel model)
+        public async Task<PagedListViewModel<ProductListItemViewModel>> GetAllAsync(SearchProductsViewModel model)
         {
             var skipRecords = model.PageNumber * model.MaxNumberOfRows;
             var query = _products.Include(x => x.ProductWarehouses).AsQueryable();

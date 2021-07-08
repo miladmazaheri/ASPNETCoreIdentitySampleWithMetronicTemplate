@@ -14,7 +14,7 @@ namespace Pars.Services.Contracts
         Task BatchUpdateProductWarehousesAsync(List<ProductWarehouseUpdateInput> input);
         Task DeleteAsync(string id);
         Task BatchDeleteAsync(List<string> ids);
-        Task<ProductViewModel> GetProductAsync(string id);
-        Task<PagedListViewModel<ProductListItemViewModel>> GetAllProductsAsync(SearchProductsViewModel model);
+        Task<ProductViewModel> GetAsync(string id);
+        Task<PagedListViewModel<ProductListItemViewModel>> GetAllAsync(SearchProductsViewModel model);
     }
 }

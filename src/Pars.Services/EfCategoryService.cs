@@ -90,7 +90,7 @@ namespace Pars.Services
             model.Title = item.Title;
         }
 
-        public async Task<CategoryViewModel> GetCategoryAsync(string id)
+        public async Task<CategoryViewModel> GetAsync(string id)
         {
             var item = await _categories.FirstAsync(x => x.Id == id);
             var res = new CategoryViewModel();
@@ -98,7 +98,7 @@ namespace Pars.Services
             return res;
         }
 
-        public async Task<PagedListViewModel<CategoryViewModel>> GetAllCategoriesAsync(SearchCategoriesViewModel model)
+        public async Task<PagedListViewModel<CategoryViewModel>> GetAsync(SearchCategoriesViewModel model)
         {
             var skipRecords = model.PageNumber * model.MaxNumberOfRows;
             var query = _categories.AsQueryable();
