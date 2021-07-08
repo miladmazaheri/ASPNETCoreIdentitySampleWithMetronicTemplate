@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Pars.Attributes;
+using Pars.Services.Contracts;
 using Pars.ViewModels.Products;
 
 namespace Pars.Controllers
@@ -14,40 +15,49 @@ namespace Pars.Controllers
     [ApiKey]
     public class ProductController : ControllerBase
     {
+        private readonly IProductService _productService;
+
+        public ProductController(IProductService productService)
+        {
+            _productService = productService;
+        }
+
         [HttpPut]
         public async Task InsertOrUpdateAsync([FromBody] ProductUpdateInput input)
         {
-            //TODO
+            await _productService.InsertOrUpdateAsync(input);
         }
 
         [HttpPut]
         public async Task BatchInsertOrUpdateAsync([FromBody] List<ProductUpdateInput> input)
         {
-            //TODO
+            await _productService.BatchInsertOrUpdateAsync(input);
         }
 
         [HttpPut]
         public async Task UpdateProductWarehousesAsync([FromBody] ProductWarehouseUpdateInput input)
         {
-            //TODO
+            await _productService.UpdateProductWarehousesAsync(input);
         }
 
         [HttpPut]
         public async Task BatchUpdateProductWarehousesAsync([FromBody] List<ProductWarehouseUpdateInput> input)
         {
-            //TODO
+            await _productService.BatchUpdateProductWarehousesAsync(input);
         }
 
         [HttpDelete]
         public async Task DeleteAsync([FromBody] string id)
         {
-            //TODO
+            await _productService.DeleteAsync(id);
+
         }
 
         [HttpDelete]
         public async Task BatchDeleteAsync([FromBody] List<string> ids)
         {
-            //TODO
+            await _productService.BatchDeleteAsync(ids);
+
         }
     }
 }

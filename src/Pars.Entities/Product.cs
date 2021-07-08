@@ -1,9 +1,15 @@
-﻿using Pars.Entities.AuditableEntity;
+﻿using System.Collections.Generic;
+using Pars.Entities.AuditableEntity;
 
 namespace Pars.Entities
 {
     public class Product : IAuditableEntity
     {
+
+        public Product()
+        {
+            ProductWarehouses = new HashSet<ProductWarehouse>();
+        }
         public string Id { get; set; }
 
         public string Name { get; set; }
@@ -27,5 +33,8 @@ namespace Pars.Entities
 
         public virtual Category Category { get; set; }
         public string CategoryId { get; set; }
+
+
+        public virtual ICollection<ProductWarehouse> ProductWarehouses { get; set; }
     }
 }

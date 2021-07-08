@@ -10,9 +10,17 @@ namespace Pars.Entities
 {
     public class Warehouse:IAuditableEntity
     {
+
+        public Warehouse()
+        {
+            ProductWarehouses = new HashSet<ProductWarehouse>();
+        }
         public string Id { get; set; }
         public string Name { get; set; }
         public int? UserId { get; set; }
         public User User { get; set; }
+
+        public virtual ICollection<ProductWarehouse> ProductWarehouses { get; set; }
+
     }
 }

@@ -18,6 +18,11 @@ namespace Pars.DataLayer.Configurations
             builder.HasKey(x => new {x.ProductId, x.WarehouseId});
             builder.Property(x => x.ProductId).HasMaxLength(KeyMaxLength).IsRequired();
             builder.Property(x => x.WarehouseId).HasMaxLength(KeyMaxLength).IsRequired();
+
+            builder.HasOne(x => x.Product).WithMany(x => x.ProductWarehouses).HasForeignKey(x => x.ProductId)
+                .IsRequired().OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x => x.Warehouse).WithMany(x => x.ProductWarehouses).HasForeignKey(x => x.WarehouseId)
+                .IsRequired().OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
