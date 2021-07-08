@@ -174,7 +174,7 @@ namespace Pars.Services
             model.Stock = item.ProductWarehouses?.Sum(x => x.Count) ?? 0;
         }
 
-        public async Task<ProductViewModel> GetProduct(string id)
+        public async Task<ProductViewModel> GetProductAsync(string id)
         {
             var item =await _products.Include(x => x.Category).Include(x => x.ProductWarehouses)
                 .FirstAsync(x => x.Id == id);
