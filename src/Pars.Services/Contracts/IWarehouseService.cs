@@ -18,5 +18,6 @@ namespace Pars.Services.Contracts
         Task BatchDeleteAsync(List<string> ids);
         Task<WarehouseViewModel> GetAsync(string id);
         Task<PagedListViewModel<WarehouseViewModel>> GetAllAsync(SearchWarehousesViewModel model);
+        Task<List<WarehouseViewModel>> GetAllAsync();
     }
 }

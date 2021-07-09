@@ -20,6 +20,8 @@ namespace Pars.Entities
         public int? UserId { get; set; }
         public User User { get; set; }
 
+        public string Address { get; set; }
+
         public virtual ICollection<ProductWarehouse> ProductWarehouses { get; set; }
 
     }

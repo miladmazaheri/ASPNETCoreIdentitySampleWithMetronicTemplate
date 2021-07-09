@@ -132,6 +132,7 @@ namespace Pars.Services
 
             item.Id = model.Id;
             item.Name = model.Name;
+            item.Address = model.Address;
             item.UserId = model.UserId;
 
         }
@@ -142,6 +143,7 @@ namespace Pars.Services
             model.Id = item.Id;
             model.Name = item.Name;
             model.UserId = item.UserId;
+            model.Address = item.Address;
             model.UserName = item.User?.DisplayName ?? string.Empty;
         }
 
@@ -180,9 +182,22 @@ namespace Pars.Services
                     Id = x.Id,
                     Name = x.Name,
                     UserId = x.UserId,
+                    Address = x.Address,
                     UserName = x.User != null ? x.User.DisplayName : string.Empty
                 }).ToListAsync(),
             };
+        }
+
+        public Task<List<WarehouseViewModel>> GetAllAsync()
+        {
+            return _warehouses.OrderBy(x => x.Name).Select(x => new WarehouseViewModel
+            {
+                Id = x.Id,
+                Name = x.Name,
+                UserId = x.UserId,
+                Address = x.Address,
+                UserName = x.User != null ? x.User.DisplayName : string.Empty
+            }).ToListAsync();
         }
     }
 }

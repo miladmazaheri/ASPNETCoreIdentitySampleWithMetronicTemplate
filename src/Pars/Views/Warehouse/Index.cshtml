@@ -1,0 +1,47 @@
+﻿@model List<Pars.ViewModels.Warehouses.WarehouseViewModel>
+@{
+    ViewBag.Title = "انبار محصولات";
+    Layout = "_MetronicLayout";
+}
+
+
+<div class="card card-custom">
+    <div class="card-header">
+        <div class="card-title">
+            <span class="card-icon">
+                <i class="flaticon2-box-1 text-success"></i>
+            </span>
+            <h3 class="card-label">لیست انبار ها</h3>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row my-10">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-6 col-xxl-3 border-right-0 border-right-md border-bottom border-bottom-xxl-0">
+                    <div class="pt-30 pt-md-25 pb-15 px-5 text-center">
+                        <span class="font-size-h1 d-block font-weight-boldest text-dark-75 py-2">@item.Name</span>
+                        <h4 class="font-size-h6 d-block font-weight-bold mb-7 text-dark-50">
+                            @if (!string.IsNullOrWhiteSpace(item.UserName))
+                            {
+                                <span>انبار کاربر : <b>@item.UserName</b></span>
+                            }
+                            else
+                            {
+                                <span>انبار محصولات</span>
+                            }
+                        </h4>
+                        <p class="mb-15 d-flex flex-column">
+                            <span>@item.Address</span>
+                        </p>
+                        <div class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-primary text-uppercase font-weight-bolder px-15 py-3">
+                                مشاهده محتویات انبار
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

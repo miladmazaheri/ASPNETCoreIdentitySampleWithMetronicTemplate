@@ -11,18 +11,25 @@ namespace Pars.ViewModels.Warehouses
     {
         private const int KeyMaxLength = 64;
         private const int StringMaxLength = 128;
+        private const int AddressMaxLength = 512;
+
         [Required]
         [StringLength(KeyMaxLength)]
         public string Id { get; set; }
         [Required]
         [StringLength(StringMaxLength)]
         public string Name { get; set; }
+        [StringLength(51212)]
+        public string Address { get; set; }
+
         public int? UserId { get; set; }
     }
     public class WarehouseViewModel
     {
         public string Id { get; set; }
         public string Name { get; set; }
+        public string Address { get; set; }
+
         public int? UserId { get; set; }
         public string UserName { get; set; }
     }
