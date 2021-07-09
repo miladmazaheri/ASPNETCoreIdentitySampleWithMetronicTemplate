@@ -1,24 +1,20 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Pars.Attributes;
 using Pars.Services.Contracts;
-using Pars.ViewModels.Products;
 using Pars.ViewModels.Warehouses;
 
-namespace Pars.Controllers
+namespace Pars.Controllers.API
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/Warehouse/[action]")]
     [ApiController]
     [ApiKey]
-    public class WarehouseController : ControllerBase
+    public class WarehouseApiController : ControllerBase
     {
         private readonly IWarehouseService _warehouseService;
 
-        public WarehouseController(IWarehouseService warehouseService)
+        public WarehouseApiController(IWarehouseService warehouseService)
         {
             _warehouseService = warehouseService;
         }

@@ -1,23 +1,20 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Pars.Attributes;
 using Pars.Services.Contracts;
 using Pars.ViewModels.Products;
 
-namespace Pars.Controllers
+namespace Pars.Controllers.API
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/Product/[action]")]
     [ApiController]
     [ApiKey]
-    public class ProductController : ControllerBase
+    public class ProductApiController : ControllerBase
     {
         private readonly IProductService _productService;
 
-        public ProductController(IProductService productService)
+        public ProductApiController(IProductService productService)
         {
             _productService = productService;
         }

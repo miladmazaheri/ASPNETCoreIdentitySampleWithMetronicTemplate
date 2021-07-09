@@ -1,26 +1,21 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Pars.Attributes;
-using Pars.Common.Enums;
 using Pars.Services.Contracts;
-using Pars.ViewModels;
 using Pars.ViewModels.Orders;
 using Pars.ViewModels.Public;
-
-namespace Pars.Controllers
+using Pars.Common.Enums;
+namespace Pars.Controllers.API
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/Order/[action]")]
     [ApiController]
     [ApiKey]
-    public class OrderController : ControllerBase
+    public class OrderApiController : ControllerBase
     {
         private readonly IOrderService _orderService;
 
-        public OrderController(IOrderService orderService)
+        public OrderApiController(IOrderService orderService)
         {
             _orderService = orderService;
         }

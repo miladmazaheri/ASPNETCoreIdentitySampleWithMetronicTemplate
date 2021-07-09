@@ -1,23 +1,20 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Pars.Attributes;
 using Pars.Services.Contracts;
 using Pars.ViewModels.Categories;
 
-namespace Pars.Controllers
+namespace Pars.Controllers.API
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/Category/[action]")]
     [ApiController]
     [ApiKey]
-    public class CategoryController : ControllerBase
+    public class CategoryApiController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
 
-        public CategoryController(ICategoryService categoryService)
+        public CategoryApiController(ICategoryService categoryService)
         {
             _categoryService = categoryService;
         }
