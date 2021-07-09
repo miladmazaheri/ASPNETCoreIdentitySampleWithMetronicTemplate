@@ -98,7 +98,7 @@ namespace Pars.Services
             return res;
         }
 
-        public async Task<PagedListViewModel<CategoryViewModel>> GetAsync(SearchCategoriesViewModel model)
+        public async Task<PagedListViewModel<CategoryViewModel>> GetAllAsync(SearchCategoriesViewModel model)
         {
             var skipRecords = model.PageNumber * model.MaxNumberOfRows;
             var query = _categories.AsQueryable();
@@ -124,6 +124,17 @@ namespace Pars.Services
                     Picture = x.Picture,
                 }).ToListAsync(),
             };
+        }
+
+        public Task<List<CategoryViewModel>> GetAllAsync()
+        {
+            return _categories.OrderBy(x=>x.Name).Select(x => new CategoryViewModel
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Title = x.Title,
+                Picture = x.Picture,
+            }).ToListAsync();
         }
     }
 }

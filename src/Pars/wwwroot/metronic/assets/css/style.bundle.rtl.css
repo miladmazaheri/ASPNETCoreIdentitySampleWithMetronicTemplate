@@ -441,6 +441,11 @@ mark,
   max-width: 100%;
   height: auto; }
 
+.img-category {
+    max-height: 100px;
+    max-width: 100px;
+}
+
 .figure {
   display: inline-block; }
 
