@@ -12,7 +12,7 @@ namespace Pars.Controllers
         [BreadCrumb(Title = "ایندکس", Order = 1)]
         public IActionResult Index()
         {
-            return RedirectToAction("Index", "Home", new { Area = AreaConstants.IdentityArea });
+            return View();
         }
 
         [BreadCrumb(Title = "خطا", Order = 1)]
