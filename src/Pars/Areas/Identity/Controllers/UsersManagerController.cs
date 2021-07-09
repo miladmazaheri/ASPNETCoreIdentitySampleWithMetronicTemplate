@@ -14,7 +14,7 @@ namespace Pars.Areas.Identity.Controllers
 {
     [Authorize(Roles = ConstantRoles.Admin)]
     [Area(AreaConstants.IdentityArea)]
-    [BreadCrumb(Title = "مدیریت کاربران", UseDefaultRouteUrl = true, Order = 0)]
+    //[BreadCrumb(Title = "مدیریت کاربران", UseDefaultRouteUrl = true, Order = 0)]
     public class UsersManagerController : Controller
     {
         private const int DefaultPageSize = 7;
@@ -140,7 +140,7 @@ namespace Pars.Areas.Identity.Controllers
             return await returnUserCardPartialView(thisUser);
         }
 
-        [BreadCrumb(Title = "ایندکس", Order = 1)]
+        //[BreadCrumb(Title = "ایندکس", Order = 1)]
         public async Task<IActionResult> Index(int? page = 1, string field = "Id", SortOrder order = SortOrder.Ascending)
         {
             var model = await _userManager.GetPagedUsersListAsync(

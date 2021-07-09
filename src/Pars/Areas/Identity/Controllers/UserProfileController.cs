@@ -22,7 +22,7 @@ namespace Pars.Areas.Identity.Controllers
 {
     [Authorize]
     [Area(AreaConstants.IdentityArea)]
-    [BreadCrumb(Title = "مشخصات کاربری", UseDefaultRouteUrl = true, Order = 0)]
+    //[BreadCrumb(Title = "مشخصات کاربری", UseDefaultRouteUrl = true, Order = 0)]
     public class UserProfileController : Controller
     {
         private readonly IEmailSender _emailSender;
@@ -61,7 +61,7 @@ namespace Pars.Areas.Identity.Controllers
         }
 
         [Authorize(Roles = ConstantRoles.Admin)]
-        [BreadCrumb(Title = "ایندکس", Order = 1)]
+        //[BreadCrumb(Title = "ایندکس", Order = 1)]
         public async Task<IActionResult> AdminEdit(int? id)
         {
             if (!id.HasValue)
@@ -73,7 +73,7 @@ namespace Pars.Areas.Identity.Controllers
             return await renderForm(user, isAdminEdit: true);
         }
 
-        [BreadCrumb(Title = "ایندکس", Order = 1)]
+        //[BreadCrumb(Title = "ایندکس", Order = 1)]
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetCurrentUserAsync();

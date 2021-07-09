@@ -16,7 +16,7 @@ namespace Pars.Areas.Identity.Controllers
     /// </summary>
     [Authorize(Roles = ConstantRoles.Admin)]
     [Area(AreaConstants.IdentityArea)]
-    [BreadCrumb(Title = "مدیریت نقش‌های پویا", UseDefaultRouteUrl = true, Order = 0)]
+    //[BreadCrumb(Title = "مدیریت نقش‌های پویا", UseDefaultRouteUrl = true, Order = 0)]
     public class DynamicRoleClaimsManagerController : Controller
     {
         private readonly IMvcActionsDiscoveryService _mvcActionsDiscoveryService;
@@ -30,15 +30,15 @@ namespace Pars.Areas.Identity.Controllers
             _roleManager = roleManager ?? throw new ArgumentNullException(nameof(roleManager));
         }
 
-        [BreadCrumb(Title = "ایندکس", Order = 1)]
+        //[BreadCrumb(Title = "ایندکس", Order = 1)]
         public async Task<IActionResult> Index(int? id)
         {
-            this.AddBreadCrumb(new BreadCrumb
-            {
-                Title = "مدیریت نقش‌ها",
-                Url = Url.Action("Index", "RolesManager"),
-                Order = -1
-            });
+            //this.AddBreadCrumb(new BreadCrumb
+            //{
+            //    Title = "مدیریت نقش‌ها",
+            //    Url = Url.Action("Index", "RolesManager"),
+            //    Order = -1
+            //});
 
             if (!id.HasValue)
             {

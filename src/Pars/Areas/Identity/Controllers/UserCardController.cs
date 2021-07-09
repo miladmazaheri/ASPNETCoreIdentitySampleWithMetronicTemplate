@@ -12,7 +12,7 @@ namespace Pars.Areas.Identity.Controllers
 {
     [AllowAnonymous]
     [Area(AreaConstants.IdentityArea)]
-    [BreadCrumb(Title = "برگه‌ی کاربری", UseDefaultRouteUrl = true, Order = 0)]
+    //[BreadCrumb(Title = "برگه‌ی کاربری", UseDefaultRouteUrl = true, Order = 0)]
     public class UserCardController : Controller
     {
         private readonly IApplicationUserManager _userManager;
@@ -26,7 +26,7 @@ namespace Pars.Areas.Identity.Controllers
             _roleManager = roleManager ?? throw new ArgumentNullException(nameof(roleManager));
         }
 
-        [BreadCrumb(Title = "ایندکس", Order = 1)]
+        //[BreadCrumb(Title = "ایندکس", Order = 1)]
         public async Task<IActionResult> Index(int? id)
         {
             if (!id.HasValue && User.Identity.IsAuthenticated)
@@ -67,7 +67,7 @@ namespace Pars.Areas.Identity.Controllers
             return new FileContentResult(fileContents, "image/png");
         }
 
-        [BreadCrumb(Title = "لیست کاربران آنلاین", Order = 1)]
+        //[BreadCrumb(Title = "لیست کاربران آنلاین", Order = 1)]
         public IActionResult OnlineUsers()
         {
             return View();

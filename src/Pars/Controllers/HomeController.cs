@@ -6,16 +6,16 @@ using Pars.Areas.Identity;
 
 namespace Pars.Controllers
 {
-    [BreadCrumb(Title = "خانه", UseDefaultRouteUrl = true, Order = 0)]
+    //[BreadCrumb(Title = "پیشخوان", UseDefaultRouteUrl = true, Order = 0)]
     public class HomeController : Controller
     {
-        [BreadCrumb(Title = "ایندکس", Order = 1)]
+        //[BreadCrumb(Title = "ایندکس", Order = 1)]
         public IActionResult Index()
         {
             return View();
         }
 
-        [BreadCrumb(Title = "خطا", Order = 1)]
+        //[BreadCrumb(Title = "خطا", Order = 1)]
         public IActionResult Error()
         {
             return View();

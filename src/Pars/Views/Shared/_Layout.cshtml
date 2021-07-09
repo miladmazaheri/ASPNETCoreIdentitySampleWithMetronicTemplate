@@ -25,7 +25,7 @@
                 <div class="navbar-nav ml-2">
                         <a class="nav-item nav-link" asp-area="" asp-controller="Home" asp-action="Index">
                             <span class="fas fa-home" aria-hidden="true"></span>
-                            خانه
+                            پیشخوان
                         </a>
                 </div>
                 @if (User.Identity.IsAuthenticated)
@@ -56,7 +56,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 mt-5 pt-5">
-                <breadcrumb asp-homepage-title="خانه"
+                <breadcrumb asp-homepage-title="پیشخوان"
                             asp-bootstrap-version="V4"
                             asp-homepage-url="@Url.Action("Index", "Home", values: new { area = "" })"
                             asp-homepage-glyphicon="fas fa-home"></breadcrumb>

@@ -15,7 +15,7 @@ namespace Pars.Areas.Identity.Controllers
 {
     [Area(AreaConstants.IdentityArea)]
     [AllowAnonymous]
-    [BreadCrumb(Title = "ورود به سیستم", UseDefaultRouteUrl = true, Order = 0)]
+    //[BreadCrumb(Title = "ورود به سیستم", UseDefaultRouteUrl = true, Order = 0)]
     public class LoginController : Controller
     {
         private readonly ILogger<LoginController> _logger;
@@ -35,7 +35,7 @@ namespace Pars.Areas.Identity.Controllers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        [BreadCrumb(Title = "ایندکس", Order = 1)]
+        //[BreadCrumb(Title = "ایندکس", Order = 1)]
         [NoBrowserCache]
         public IActionResult Index(string returnUrl = null)
         {

@@ -21,7 +21,7 @@ namespace Pars.Areas.Identity.Controllers
 {
     [Area(AreaConstants.IdentityArea)]
     [AllowAnonymous]
-    [BreadCrumb(Title = "ثبت نام", UseDefaultRouteUrl = true, Order = 0)]
+    //[BreadCrumb(Title = "ثبت نام", UseDefaultRouteUrl = true, Order = 0)]
     public class RegisterController : Controller
     {
         private readonly IEmailSender _emailSender;
@@ -71,7 +71,7 @@ namespace Pars.Areas.Identity.Controllers
             return Json(result.Succeeded ? "true" : result.DumpErrors(useHtmlNewLine: true));
         }
 
-        [BreadCrumb(Title = "تائید ایمیل", Order = 1)]
+        //[BreadCrumb(Title = "تائید ایمیل", Order = 1)]
         public async Task<IActionResult> ConfirmEmail(string userId, string code)
         {
             if (userId == null || code == null)
@@ -89,13 +89,13 @@ namespace Pars.Areas.Identity.Controllers
             return View(result.Succeeded ? nameof(ConfirmEmail) : "Error");
         }
 
-        [BreadCrumb(Title = "ایندکس", Order = 1)]
+        //[BreadCrumb(Title = "ایندکس", Order = 1)]
         public IActionResult Index()
         {
             return View();
         }
 
-        [BreadCrumb(Title = "تائیدیه ایمیل", Order = 1)]
+        //[BreadCrumb(Title = "تائیدیه ایمیل", Order = 1)]
         public IActionResult ConfirmedRegisteration()
         {
             return View();
@@ -164,7 +164,7 @@ namespace Pars.Areas.Identity.Controllers
             return View(model);
         }
 
-        [BreadCrumb(Title = "ایمیل خود را تائید کنید", Order = 1)]
+        //[BreadCrumb(Title = "ایمیل خود را تائید کنید", Order = 1)]
         public IActionResult ConfirmYourEmail()
         {
             return View();

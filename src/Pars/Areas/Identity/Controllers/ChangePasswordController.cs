@@ -18,7 +18,7 @@ namespace Pars.Areas.Identity.Controllers
 {
     [Authorize]
     [Area(AreaConstants.IdentityArea)]
-    [BreadCrumb(Title = "تغییر کلمه‌ی عبور", UseDefaultRouteUrl = true, Order = 0)]
+    //[BreadCrumb(Title = "تغییر کلمه‌ی عبور", UseDefaultRouteUrl = true, Order = 0)]
     public class ChangePasswordController : Controller
     {
         private readonly IEmailSender _emailSender;
@@ -44,7 +44,7 @@ namespace Pars.Areas.Identity.Controllers
             _siteOptions = siteOptions ?? throw new ArgumentNullException(nameof(siteOptions));
         }
 
-        [BreadCrumb(Title = "ایندکس", Order = 1)]
+        //[BreadCrumb(Title = "ایندکس", Order = 1)]
         public async Task<IActionResult> Index()
         {
             var userId = this.User.Identity.GetUserId<int>();

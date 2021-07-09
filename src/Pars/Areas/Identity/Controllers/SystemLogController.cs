@@ -11,7 +11,7 @@ namespace Pars.Areas.Identity.Controllers
 {
     [Authorize(Roles = ConstantRoles.Admin)]
     [Area(AreaConstants.IdentityArea)]
-    [BreadCrumb(Title = "لاگ سیستم", UseDefaultRouteUrl = true, Order = 0)]
+    //[BreadCrumb(Title = "لاگ سیستم", UseDefaultRouteUrl = true, Order = 0)]
     public class SystemLogController : Controller
     {
         private readonly IAppLogItemsService _appLogItemsService;
@@ -22,7 +22,7 @@ namespace Pars.Areas.Identity.Controllers
             _appLogItemsService = appLogItemsService ?? throw new ArgumentNullException(nameof(appLogItemsService));
         }
 
-        [BreadCrumb(Title = "ایندکس", Order = 1)]
+        //[BreadCrumb(Title = "ایندکس", Order = 1)]
         public async Task<IActionResult> Index(
                         string logLevel = "",
                         int pageNumber = 1,

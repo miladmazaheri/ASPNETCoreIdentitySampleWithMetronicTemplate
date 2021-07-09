@@ -16,7 +16,7 @@ namespace Pars.Areas.Identity.Controllers
 {
     [Authorize]
     [Area(AreaConstants.IdentityArea)]
-    [BreadCrumb(Title = "اعتبارسنجی دو مرحله‌ای", UseDefaultRouteUrl = true, Order = 0)]
+    //[BreadCrumb(Title = "اعتبارسنجی دو مرحله‌ای", UseDefaultRouteUrl = true, Order = 0)]
     public class TwoFactorController : Controller
     {
         private readonly IEmailSender _emailSender;
@@ -40,7 +40,7 @@ namespace Pars.Areas.Identity.Controllers
         }
 
         [AllowAnonymous]
-        [BreadCrumb(Title = "ارسال کد", Order = 1)]
+        //[BreadCrumb(Title = "ارسال کد", Order = 1)]
         public async Task<IActionResult> SendCode(string returnUrl = null, bool rememberMe = false)
         {
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
@@ -78,7 +78,7 @@ namespace Pars.Areas.Identity.Controllers
         }
 
         [AllowAnonymous]
-        [BreadCrumb(Title = "تائید کد", Order = 1)]
+        //[BreadCrumb(Title = "تائید کد", Order = 1)]
         public async Task<IActionResult> VerifyCode(string provider, bool rememberMe, string returnUrl = null)
         {
             // Require that the user has already logged in via username/password or external login

@@ -14,7 +14,7 @@ namespace Pars.Areas.Identity.Controllers
 {
     [Authorize(Roles = ConstantRoles.Admin)]
     [Area(AreaConstants.IdentityArea)]
-    [BreadCrumb(Title = "مدیریت نقش‌ها", UseDefaultRouteUrl = true, Order = 0)]
+    //[BreadCrumb(Title = "مدیریت نقش‌ها", UseDefaultRouteUrl = true, Order = 0)]
     public class RolesManagerController : Controller
     {
         private const string RoleNotFound = "نقش درخواستی یافت نشد.";
@@ -27,7 +27,7 @@ namespace Pars.Areas.Identity.Controllers
             _roleManager = roleManager ?? throw new ArgumentNullException(nameof(roleManager));
         }
 
-        [BreadCrumb(Title = "ایندکس", Order = 1)]
+        //[BreadCrumb(Title = "ایندکس", Order = 1)]
         public IActionResult Index()
         {
             var roles = _roleManager.GetAllCustomRolesAndUsersCountList();
@@ -153,7 +153,7 @@ namespace Pars.Areas.Identity.Controllers
             return PartialView("_Delete", model: model);
         }
 
-        [BreadCrumb(Title = "لیست کاربران دارای نقش", Order = 1)]
+        //[BreadCrumb(Title = "لیست کاربران دارای نقش", Order = 1)]
         public async Task<IActionResult> UsersInRole(int? id, int? page = 1, string field = "Id", SortOrder order = SortOrder.Ascending)
         {
             if (id == null)

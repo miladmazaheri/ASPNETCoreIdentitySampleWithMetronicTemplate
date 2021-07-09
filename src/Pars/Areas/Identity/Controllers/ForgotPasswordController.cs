@@ -19,7 +19,7 @@ namespace Pars.Areas.Identity.Controllers
 {
     [Area(AreaConstants.IdentityArea)]
     [AllowAnonymous]
-    [BreadCrumb(Title = "بازیابی کلمه‌ی عبور", UseDefaultRouteUrl = true, Order = 0)]
+    //[BreadCrumb(Title = "بازیابی کلمه‌ی عبور", UseDefaultRouteUrl = true, Order = 0)]
     public class ForgotPasswordController : Controller
     {
         private readonly IEmailSender _emailSender;
@@ -39,13 +39,13 @@ namespace Pars.Areas.Identity.Controllers
             _siteOptions = siteOptions ?? throw new ArgumentNullException(nameof(siteOptions));
         }
 
-        [BreadCrumb(Title = "تائید کلمه‌ی عبور فراموش شده", Order = 1)]
+        //[BreadCrumb(Title = "تائید کلمه‌ی عبور فراموش شده", Order = 1)]
         public IActionResult ForgotPasswordConfirmation()
         {
             return View();
         }
 
-        [BreadCrumb(Title = "ایندکس", Order = 1)]
+        //[BreadCrumb(Title = "ایندکس", Order = 1)]
         public IActionResult Index()
         {
             return View();
@@ -102,7 +102,7 @@ namespace Pars.Areas.Identity.Controllers
             return View(model);
         }
 
-        [BreadCrumb(Title = "تغییر کلمه‌ی عبور", Order = 1)]
+        //[BreadCrumb(Title = "تغییر کلمه‌ی عبور", Order = 1)]
         public IActionResult ResetPassword(string code = null)
         {
             return code == null ? View("Error") : View();
@@ -138,7 +138,7 @@ namespace Pars.Areas.Identity.Controllers
             return View();
         }
 
-        [BreadCrumb(Title = "تائیدیه تغییر کلمه‌ی عبور", Order = 1)]
+        //[BreadCrumb(Title = "تائیدیه تغییر کلمه‌ی عبور", Order = 1)]
         public IActionResult ResetPasswordConfirmation()
         {
             return View();

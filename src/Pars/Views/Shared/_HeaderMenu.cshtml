@@ -1,7 +1,36 @@
 ﻿<li class="menu-item" data-menu-toggle="click" aria-haspopup="true">
     <a asp-controller="Home" asp-action="Index" asp-area="@AreaConstants.IdentityArea" class="menu-link">
-        <span class="menu-text">داشبورد</span>
+        <span class="menu-text">پیشخوان</span>
     </a>
+</li>
+<li class="menu-item  menu-item-submenu menu-item-rel" data-menu-toggle="click" aria-haspopup="true">
+    <a href="javascript:;" class="menu-link menu-toggle">
+        <span class="menu-text">سفارشات</span><i class="menu-arrow"></i>
+    </a>
+    <div class="menu-submenu menu-submenu-classic menu-submenu-left">
+        <ul class="menu-subnav">
+            <li class="menu-item " aria-haspopup="true">
+                <a href="/#" class="menu-link ">
+                    <span class="menu-text">ثبت سفارش</span><span class="menu-desc"></span>
+                </a>
+            </li>
+            <li class="menu-item " aria-haspopup="true">
+                <a href="#" class="menu-link ">
+                    <span class="menu-text">لیست سفارشات جدید</span><span class="menu-desc"></span>
+                </a>
+            </li>
+            <li class="menu-item " aria-haspopup="true">
+                <a href="/#" class="menu-link ">
+                    <span class="menu-text">سفارشات در حال تولید</span><span class="menu-desc"></span>
+                </a>
+            </li>
+            <li class="menu-item " aria-haspopup="true">
+                <a href="/#" class="menu-link ">
+                    <span class="menu-text">سفارشات تحویل شده</span><span class="menu-desc"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
 </li>
 <li class="menu-item  menu-item-submenu menu-item-rel" data-menu-toggle="click" aria-haspopup="true">
     <a href="javascript:;" class="menu-link menu-toggle">
