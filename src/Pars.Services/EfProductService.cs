@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using cloudscribe.Web.Pagination;
 using Pars.DataLayer.Context;
 using Pars.Entities;
 using Pars.Services.Contracts;
@@ -22,7 +23,7 @@ namespace Pars.Services
             _products = _uow.Set<Product>();
         }
 
-       
+
 
         public async Task InsertOrUpdateAsync(ProductUpdateInput input)
         {
@@ -176,10 +177,10 @@ namespace Pars.Services
 
         public async Task<ProductViewModel> GetAsync(string id)
         {
-            var item =await _products.Include(x => x.Category).Include(x => x.ProductWarehouses)
+            var item = await _products.Include(x => x.Category).Include(x => x.ProductWarehouses)
                 .FirstAsync(x => x.Id == id);
-            var res= new ProductViewModel();
-            MapToModel(res,item);
+            var res = new ProductViewModel();
+            MapToModel(res, item);
             return res;
         }
 
@@ -195,6 +196,10 @@ namespace Pars.Services
             {
                 query = query.Where(x => x.CategoryId == model.CategoryId);
             }
+            if (!string.IsNullOrWhiteSpace(model.WarehouseId))
+            {
+                query = query.Where(x => x.ProductWarehouses.Any(x => x.WarehouseId == model.WarehouseId));
+            }
             if (!string.IsNullOrWhiteSpace(model.Size))
             {
                 query = query.Where(x => x.Size == model.Size);
@@ -202,7 +207,7 @@ namespace Pars.Services
             query = query.OrderBy(x => x.Id);
             return new PagedListViewModel<ProductListItemViewModel>
             {
-                Paging =
+                Paging = new PaginationSettings()
                 {
                     TotalItems = await query.CountAsync(),
                     CurrentPage = model.PageNumber,
@@ -217,7 +222,7 @@ namespace Pars.Services
                     Name = x.Name,
                     Price = x.Price,
                     Picture = x.Picture,
-                    Stock = x.ProductWarehouses.Sum(x => x.Count)
+                    Stock = x.ProductWarehouses.Sum(c => c.Count)
                 }).ToListAsync(),
             };
         }

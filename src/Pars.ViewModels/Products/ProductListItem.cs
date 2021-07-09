@@ -28,14 +28,17 @@ namespace Pars.ViewModels.Products
     {
         public string Name { get; set; }
         public string Sort { get; set; }
-        public string CategoryId  { get; set; }
+        public string CategoryId { get; set; }
         public string Size { get; set; }
+
         [Display(Name = "تعداد ردیف بازگشتی")]
         [Required(ErrorMessage = "(*)")]
         [Range(1, 1000, ErrorMessage = "عدد وارد شده باید در بازه 1 تا 1000 تعیین شود")]
-        public int MaxNumberOfRows { set; get; }
+        public int MaxNumberOfRows { set; get; } = 10;
 
-        public int PageNumber { get; set; }
+        public int PageNumber { get; set; } = 0;
+
+        public string WarehouseId { get; set; }
     }
 
 }
