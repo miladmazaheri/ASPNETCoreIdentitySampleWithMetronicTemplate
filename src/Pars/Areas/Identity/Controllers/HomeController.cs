@@ -6,10 +6,10 @@ namespace Pars.Areas.Identity.Controllers
 {
     [Area(AreaConstants.IdentityArea)]
     [Authorize]
-    [BreadCrumb(Title = "خانه", UseDefaultRouteUrl = true, Order = 0)]
+    //[BreadCrumb(Title = "خانه", UseDefaultRouteUrl = true, Order = 0)]
     public class HomeController : Controller
     {
-        [BreadCrumb(Title = "ایندکس", Order = 1)]
+        //[BreadCrumb(Title = "داشبورد", Order = 1)]
         public IActionResult Index() => View();
     }
 }
