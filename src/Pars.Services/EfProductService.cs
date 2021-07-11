@@ -186,7 +186,7 @@ namespace Pars.Services
 
         public async Task<PagedListViewModel<ProductListItemViewModel>> GetAllAsync(SearchProductsViewModel model)
         {
-            var skipRecords = model.PageNumber * model.MaxNumberOfRows;
+            var skipRecords = (model.PageNumber-1) * model.MaxNumberOfRows;
             var query = _products.Include(x => x.ProductWarehouses).AsQueryable();
             if (!string.IsNullOrWhiteSpace(model.Name))
             {
@@ -205,6 +205,7 @@ namespace Pars.Services
                 query = query.Where(x => x.Size == model.Size);
             }
             query = query.OrderBy(x => x.Id);
+            
             return new PagedListViewModel<ProductListItemViewModel>
             {
                 Paging = new PaginationSettings()
