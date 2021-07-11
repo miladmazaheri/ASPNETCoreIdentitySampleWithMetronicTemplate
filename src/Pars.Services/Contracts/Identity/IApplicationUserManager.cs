@@ -1067,5 +1067,7 @@ namespace Pars.Services.Contracts.Identity
         Task<PagedUsersListViewModel> GetPagedUsersListAsync(SearchUsersViewModel model, int pageNumber);
 
         #endregion
+
+        Task<string> GenerateApiKeyAsync(int userId);
     }
 }

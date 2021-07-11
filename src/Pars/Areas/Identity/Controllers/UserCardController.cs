@@ -72,5 +72,11 @@ namespace Pars.Areas.Identity.Controllers
         {
             return View();
         }
+
+        [Authorize(Roles = ConstantRoles.Admin)]
+        public async Task<IActionResult> GenerateApiKey(int userId)
+        {
+            return Ok(await _userManager.GenerateApiKeyAsync(userId));
+        }
     }
 }

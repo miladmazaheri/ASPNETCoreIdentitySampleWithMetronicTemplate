@@ -46,7 +46,7 @@ namespace Pars.Areas.Identity.Controllers
                 return BadRequest(error: result.DumpErrors(useHtmlNewLine: true));
             }
 
-            return await returnUserCardPartialView(thisUser);
+            return await ReturnUserCardPartialView(thisUser);
         }
 
         [AjaxOnly, HttpPost, ValidateAntiForgeryToken]
@@ -65,7 +65,7 @@ namespace Pars.Areas.Identity.Controllers
                 return BadRequest(error: result.DumpErrors(useHtmlNewLine: true));
             }
 
-            return await returnUserCardPartialView(thisUser);
+            return await ReturnUserCardPartialView(thisUser);
         }
 
         [AjaxOnly, HttpPost, ValidateAntiForgeryToken]
@@ -80,7 +80,7 @@ namespace Pars.Areas.Identity.Controllers
                 return BadRequest(error: result.DumpErrors(useHtmlNewLine: true));
             }
 
-            return await returnUserCardPartialView(thisUser);
+            return await ReturnUserCardPartialView(thisUser);
         }
 
         [AjaxOnly, HttpPost, ValidateAntiForgeryToken]
@@ -99,7 +99,7 @@ namespace Pars.Areas.Identity.Controllers
                 return BadRequest(error: result.DumpErrors(useHtmlNewLine: true));
             }
 
-            return await returnUserCardPartialView(thisUser);
+            return await ReturnUserCardPartialView(thisUser);
         }
 
         [AjaxOnly, HttpPost, ValidateAntiForgeryToken]
@@ -118,7 +118,7 @@ namespace Pars.Areas.Identity.Controllers
                 return BadRequest(error: result.DumpErrors(useHtmlNewLine: true));
             }
 
-            return await returnUserCardPartialView(thisUser);
+            return await ReturnUserCardPartialView(thisUser);
         }
 
         [AjaxOnly, HttpPost, ValidateAntiForgeryToken]
@@ -137,7 +137,7 @@ namespace Pars.Areas.Identity.Controllers
                 return BadRequest(error: result.DumpErrors(useHtmlNewLine: true));
             }
 
-            return await returnUserCardPartialView(thisUser);
+            return await ReturnUserCardPartialView(thisUser);
         }
 
         //[BreadCrumb(Title = "ایندکس", Order = 1)]
@@ -177,7 +177,7 @@ namespace Pars.Areas.Identity.Controllers
             return PartialView("_SearchUsers", model);
         }
 
-        private async Task<IActionResult> returnUserCardPartialView(User thisUser)
+        private async Task<IActionResult> ReturnUserCardPartialView(User thisUser)
         {
             var roles = await _roleManager.GetAllCustomRolesAsync();
             return PartialView("~/Areas/Identity/Views/UserCard/_UserCardItem.cshtml",

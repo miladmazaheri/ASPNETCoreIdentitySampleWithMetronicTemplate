@@ -1,0 +1,22 @@
+﻿@model UserCardItemViewModel
+
+@{
+    var user = Model.User;
+}
+<div class="mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="input-group">
+
+                <input type="text" class="form-control text-center" id="kt_clipboard_1" placeholder="کلید ساخته نشده است" value="@user.ApiKey" dir="ltr">
+                <div class="input-group-append">
+                    <a class="btn btn-secondary" data-clipboard="true" data-clipboard-target="#kt_clipboard_1"><i class="la la-copy"></i></a>
+                </div>
+                <div class="input-group-append">
+                    <button class="btn btn-primary" onclick="generateApiKey(@user.Id)"><i class="la la-refresh"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

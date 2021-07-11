@@ -4,6 +4,7 @@
     var user = Model.User;
     var adminPartIsActive = Model.ActiveTab == UserCardItemActiveTab.UserAdmin ? "active" : "";
     var userPartIsActive = Model.ActiveTab == UserCardItemActiveTab.UserInfo ? "active" : "";
+    var apiKeyIsActive = Model.ActiveTab == UserCardItemActiveTab.ApiKey ? "active" : "";
 }
 
 <div class="card mt-5">
@@ -26,6 +27,9 @@
                         <li class="nav-item">
                             <a class="nav-link @adminPartIsActive" href="#admin-@user.Id" aria-controls="admin-@user.Id" role="tab" data-toggle="tab">مدیریت کاربر</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link @apiKeyIsActive" href="#api-key-@user.Id" aria-controls="api-key-@user.Id" role="tab" data-toggle="tab">مدیریت کلید API</a>
+                        </li>
                     }
                 </ul>
                 <div class="tab-content" id="ucTabContent">
@@ -36,6 +40,9 @@
                     {
                         <div role="tabpanel" class="tab-pane @adminPartIsActive" id="admin-@user.Id">
                             <partial name="~/Areas/Identity/Views/UserCard/_UserAdminPart.cshtml" model="Model" />
+                        </div>
+                        <div role="tabpanel" class="tab-pane @apiKeyIsActive" id="api-key-@user.Id">
+                            <partial name="~/Areas/Identity/Views/UserCard/_ApiKey.cshtml" model="Model" />
                         </div>
                     }
                 </div>

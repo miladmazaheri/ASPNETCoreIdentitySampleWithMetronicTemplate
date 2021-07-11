@@ -14,6 +14,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System;
 using DNTCommon.Web.Core;
+using NETCore.Encrypt;
 
 namespace Pars.Services.Identity
 {
@@ -304,6 +305,16 @@ namespace Pars.Services.Identity
                 Users = await query.Skip(skipRecords).Take(model.MaxNumberOfRows).ToListAsync(),
                 Roles = await _roles.ToListAsync()
             };
+        }
+
+        public async Task<string> GenerateApiKeyAsync(int userId)
+        {
+            var user = await _users.FindAsync(userId);
+            var aesKey = EncryptProvider.CreateAesKey();
+            var apiKey = EncryptProvider.AESEncrypt(user.UserName + "|" + user.Id + "|" + (user.ReferralUserId ?? 0), aesKey.Key, aesKey.IV);
+            user.ApiKey = apiKey;
+            await UpdateAsync(user);
+            return apiKey;
         }
 
         public async Task<PagedUsersListViewModel> GetPagedUsersListAsync(

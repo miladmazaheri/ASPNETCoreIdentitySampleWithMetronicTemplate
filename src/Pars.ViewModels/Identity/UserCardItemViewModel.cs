@@ -6,7 +6,8 @@ namespace Pars.ViewModels.Identity
     public enum UserCardItemActiveTab
     {
         UserInfo,
-        UserAdmin
+        UserAdmin,
+        ApiKey
     }
 
     public class UserCardItemViewModel
