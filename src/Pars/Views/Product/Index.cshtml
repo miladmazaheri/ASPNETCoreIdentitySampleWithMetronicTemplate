@@ -1,212 +1,80 @@
-﻿@model Pars.ViewModels.PagedListViewModel<Pars.ViewModels.Products.ProductListItemViewModel>
+﻿@model PagedListResult<ProductListItemViewModel, SearchProductsViewModel>
 @{
     ViewBag.Title = "لیست محصولات";
     Layout = "_MetronicLayout";
 }
-<div class="alert alert-warning">
-    این بخش در حال توسعه می باشد
-</div>
+
 <div class="card card-custom">
     <div class="card-header">
         <div class="card-title">
             <span class="card-icon"><i class="flaticon2-delivery-package text-primary"></i></span>
             <h3 class="card-label">@ViewBag.Title</h3>
         </div>
-         
+
     </div>
-    <div class="card-body">
-        <div class="dataTables_wrapper dt-bootstrap4">
-            <form class="kt-form kt-form--fit mb-15">
-                <div class="row mb-6">
-                    <div class="col-lg-3 mb-lg-0 mb-6">
-                        <label>آیدی:</label>
-                        <input type="text" class="form-control datatable-input" placeholder="E.g: 4590" data-col-index="0" />
-                    </div>
-                    <div class="col-lg-3  mb-lg-0 mb-6">
-                        <label>ایدی سفارش:</label>
-                        <input type="text" class="form-control datatable-input" placeholder="E.g: 37000-300" data-col-index="1" />
-                    </div>
-                    <div class="col-lg-3  mb-lg-0 mb-6">
-                        <label>کشور:</label>
-                        <select class="form-control datatable-input" data-col-index="2">
-                            <option value="">انتخاب</option>
-                        </select>
-                    </div>
-                    <div class="col-lg-3  mb-lg-0 mb-6">
-                        <label>آژانس:</label>
-                        <input type="text" class="form-control datatable-input" placeholder="نام یا شماره آژانس" data-col-index="4" />
-                    </div>
-                </div>
-
-                <div class="row mb-8">
-                    <div class="col-lg-3  mb-lg-0 mb-6">
-                        <label>تاریخ:</label>
-                        <div class="input-daterange input-group" id="kt_datepicker">
-                            <input type="text" class="form-control datatable-input" name="start" placeholder="From" data-col-index="5" />
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="la la-ellipsis-h"></i></span>
-                            </div>
-                            <input type="text" class="form-control datatable-input" name="end" placeholder="به" data-col-index="5" />
-                        </div>
-                    </div>
-                    <div class="col-lg-3  mb-lg-0 mb-6">
-                        <label>وضعیت:</label>
-                        <select class="form-control datatable-input" data-col-index="6">
-                            <option value="">انتخاب</option>
-                        </select>
-                    </div>
-                    <div class="col-lg-3  mb-lg-0 mb-6">
-                        <label>نوع:</label>
-                        <select class="form-control datatable-input" data-col-index="7">
-                            <option value="">انتخاب</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="row mt-8">
-                    <div class="col-lg-12">
-                        <button class="btn btn-primary btn-primary--icon" id="kt_search">
-                            <span>
-                                <i class="la la-search"></i>
-                                <span>جستجو</span>
-                            </span>
-                        </button> &nbsp;&nbsp;
-                        <button class="btn btn-secondary btn-secondary--icon" id="kt_reset">
-                            <span>
-                                <i class="la la-close"></i>
-                                <span>ریست</span>
-                            </span>
-                        </button>
-                    </div>
-                </div>
-            </form>
-            <table class="table table-separate table-hover dataTable">
-                <thead>
-                    <tr>
-                        <th>نام محصول</th>
-                        <th>قیمت</th>
-                        <th>سایز</th>
-                        <th>کد محصول</th>
-                        <th>تعداد در کارتن</th>
-                        <th>موجودی</th>
-                        <th>عملیات</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    @foreach (var item in Model.Items)
-                    {
-                        <tr role="row" class="odd">
-                            <td class="sorting_1 dtr-control">
-                                <div class="d-flex align-items-center">
-                                    <div class="symbol symbol-50 flex-shrink-0">
-                                        @if (!string.IsNullOrWhiteSpace(item.Picture))
-                                        {
-                                            <img src="@item.Picture" onerror="this.src='/metronic/assets/media/products/product.svg'" style="width: 50px;height: 50px;">
-                                        }
-                                        else
-                                        {
-                                            <img src="~/metronic/assets/media/products/product.svg" style="width: 50px;height: 50px;">
-                                        }
-                                    </div>
-                                    <div class="ml-3">
-                                        <span class="text-dark-75 font-weight-bold line-height-sm d-block pb-2">@item.Name</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    @item.Price.ToString("N0")
-                                </div>
-                            </td>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    @item.Size
-                                </div>
-                            </td>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    @item.Code
-                                </div>
-                            </td>
-                            <td style="">
-                                <div class="d-flex align-items-center">
-                                    @item.CountInBox
-                                </div>
-                            </td>
-                            <td style="">
-                                <div class="d-flex align-items-center">
-                                    @item.Stock
-                                </div>
-                            </td>
-                            <td style="" nowrap="">
-                                <a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Edit details">
-                                    <i class="la la-edit"></i>
-                                </a>
-                                <a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Delete">
-                                    <i class="la la-trash"></i>
-                                </a>
-
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-
-            </table>
-        </div>
-    </div>
-    @{
-        var pageCount = (int)Math.Round((double)(Model.Paging.TotalItems / Model.Paging.ItemsPerPage), MidpointRounding.ToPositiveInfinity) + 1;
-        var startI = Model.Paging.CurrentPage - 1 * Model.Paging.ItemsPerPage;
-        startI = startI == 0 ? 1 : startI;
-        var endI = startI + Model.Paging.ItemsPerPage;
-        var info = $"نمایش {startI} تا {endI} از {Model.Paging.TotalItems} سطر";
-
-        if (pageCount > 1)
-        {
-            <div class="card-footer">
-                <div class="row">
-                    <div class="col-sm-12 col-md-5">
-
-                        <div class="dataTables_info" id="kt_datatable_info" role="status" aria-live="polite">@info</div>
-                    </div><div class="col-sm-12 col-md-7">
-
-                        <div class="dataTables_paginate paging_full_numbers" id="kt_datatable_paginate">
-                            <ul class="pagination">
-                                <li class="paginate_button page-item first disabled" id="kt_datatable_first">
-                                    <a href="#" aria-controls="kt_datatable" data-dt-idx="0" tabindex="0" class="page-link">
-                                        <i class="ki ki-double-arrow-next"></i>
-                                    </a>
-                                </li>
-
-                                <li class="paginate_button page-item previous disabled" id="kt_datatable_previous">
-                                    <a href="#" aria-controls="kt_datatable" data-dt-idx="1" tabindex="0" class="page-link">
-                                        <i class="ki ki-arrow-next"></i>
-                                    </a>
-                                </li>
-                                @for (int i = 1; i < pageCount; i++)
-                                {
-                                    <li class="paginate_button page-item @(Model.Paging.CurrentPage == i?"active":"")">
-                                        <a href="#" aria-controls="kt_datatable" data-dt-idx="@i" tabindex="0" class="page-link">@i</a>
-                                    </li>
-                                }
-
-                                <li class="paginate_button page-item next" id="kt_datatable_next">
-                                    <a href="#" aria-controls="kt_datatable" data-dt-idx="7" tabindex="0" class="page-link">
-                                        <i class="ki ki-arrow-back"></i>
-                                    </a>
-                                </li>
-                                <li class="paginate_button page-item last" id="kt_datatable_last">
-                                    <a href="#" aria-controls="kt_datatable" data-dt-idx="8" tabindex="0" class="page-link">
-                                        <i class="ki ki-double-arrow-back"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+    <div class="card-body" id="searchAndList">
+        <form class="kt-form kt-form--fit mb-15"
+              method="get"
+              asp-area=""
+              asp-controller="Product"
+              asp-action="Search"
+              role="form"
+              data-ajax="true"
+              data-ajax-loading="#Progress"
+              data-ajax-begin="dataAjaxBegin"
+              data-ajax-success="dataAjaxSuccess"
+              data-ajax-failure="dataAjaxFailure"
+              data-ajax-complete="dataAjaxComplete"
+              data-ajax-update="#list">
+            <partial name="_SearchPanel" model="Model.SearchViewModel" />
+            <div class="row mt-8">
+                <div class="col-lg-12">
+                    <button class="btn btn-primary btn-primary--icon" type="submit">
+                        <span>
+                            <i class="la la-search"></i>
+                            <span>جستجو</span>
+                        </span>
+                    </button> &nbsp;&nbsp;
+                    <button class="btn btn-secondary btn-secondary--icon" type="reset">
+                        <span>
+                            <i class="la la-close"></i>
+                            <span>ریست</span>
+                        </span>
+                    </button>
                 </div>
             </div>
-        }
-    }
+            <div class="table-responsive" id="list">
+                <partial name="_Table" model="Model" />
+            </div>
+        </form>
+    </div>
 </div>
 
+@section Scripts
+{
+    <script src="~/lib/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.min.js"></script>
+    <script type="text/javascript">
+        function dataAjaxBegin(xhr) {
+            //$('#list').empty();
+            KTApp.block('#searchAndList', {
+                overlayColor: '#000000',
+                state: 'danger',
+                message: 'لطفا صبر کنید...'
+            });
+        }
+        
+        function dataAjaxSuccess(data, status, xhr) {
+
+        }
+
+        function dataAjaxFailure(xhr, status, error) {
+
+        }
+
+        function dataAjaxComplete(xhr, status) {
+            KTApp.unblock('#searchAndList');
+            $('abbr').attr('data-toggle', 'tooltip');
+            $('[data-toggle="tooltip"]').tooltip();
+        }
+    </script>
+}

@@ -1,0 +1,109 @@
+﻿@model PagedListResult<ProductListItemViewModel, SearchProductsViewModel>
+
+<table class="table table-separate table-hover table-head-custom table-vertical-center">
+    <thead>
+        <tr>
+            <th>نام محصول</th>
+            <th>قیمت</th>
+            <th>سایز</th>
+            <th>کد محصول</th>
+            <th>تعداد در کارتن</th>
+            <th>موجودی</th>
+            <th>عملیات</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.PagedListViewModel.Items.Any())
+        {
+            foreach (var item in Model.PagedListViewModel.Items)
+            {
+                <tr role="row" class="odd">
+                    <td class="sorting_1 dtr-control">
+                        <div class="d-flex align-items-center">
+                            <div class="symbol symbol-50 flex-shrink-0">
+                                @if (!string.IsNullOrWhiteSpace(item.Picture))
+                                {
+                                    <img src="@item.Picture" onerror="this.src = '/metronic/assets/media/products/product.svg'" style="width: 50px; height: 50px;">
+                                }
+                                else
+                                {
+                                    <img src="~/metronic/assets/media/products/product.svg" style="width: 50px; height: 50px;">
+                                }
+                            </div>
+                            <div class="ml-3">
+                                <span class="text-dark-75 font-weight-bold line-height-sm d-block pb-2">@item.Name</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            @item.Price.ToString("N0")
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            @item.Size
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            @item.Code
+                        </div>
+                    </td>
+                    <td style="">
+                        <div class="d-flex align-items-center">
+                            @item.CountInBox
+                        </div>
+                    </td>
+                    <td style="">
+                        <div class="d-flex align-items-center">
+                            @item.Stock
+                        </div>
+                    </td>
+                    <td style="" nowrap="">
+                        @*<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Edit details">
+                            <i class="la la-edit"></i>
+                        </a>
+                        <a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Delete">
+                            <i class="la la-trash"></i>
+                        </a>*@
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="7" class="text-center">هیچ دیتایی یافت نشد</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="">
+    <div class="col">
+        <cs-pager cs-paging-pagesize="@Model.PagedListViewModel.Paging.ItemsPerPage"
+                  cs-paging-pagenumber="@Model.PagedListViewModel.Paging.CurrentPage"
+                  cs-paging-totalitems="@Model.PagedListViewModel.Paging.TotalItems"
+                  cs-pagenumber-param="@nameof(Model.SearchViewModel.PageNumber)"
+                  cs-ajax-target="#list"
+                  asp-controller="Product"
+                  asp-action="Search"
+                  asp-route-pagesize="@Model.SearchViewModel.MaxNumberOfRows"
+                  cs-show-first-last="true"
+                  cs-suppress-empty-nextprev="false"
+                  cs-suppress-inactive-firstlast="false"
+                  cs-suppress-empty-pager="false"
+                  cs-first-page-text="ابتدا"
+                  cs-last-page-text="انتها"
+                  cs-pager-ul-class="pagination"
+                  cs-pager-li-current-class="page-item active"
+                  cs-pager-li-other-class="page-item"
+                  cs-pager-li-non-active-class="disabled"
+                  cs-pager-link-current-class="page-link"
+                  cs-pager-link-other-class="page-link"
+                  cs-ajax-begin="dataAjaxBegin"
+                  cs-ajax-success="dataAjaxSuccess"
+                  cs-ajax-failure="dataAjaxFailure"
+                  cs-ajax-complete="dataAjaxComplete"></cs-pager>
+    </div>
+</div>
