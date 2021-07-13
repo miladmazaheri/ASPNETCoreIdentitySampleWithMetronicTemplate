@@ -7,6 +7,7 @@ using Pars.DataLayer.Context;
 using Pars.Entities;
 using Pars.Services.Contracts;
 using Pars.ViewModels;
+using Pars.ViewModels.Public;
 using Pars.ViewModels.Warehouses;
 
 namespace Pars.Services
@@ -198,6 +199,13 @@ namespace Pars.Services
                 Address = x.Address,
                 UserName = x.User != null ? x.User.DisplayName : string.Empty
             }).ToListAsync();
+        }
+
+        public Task<List<NameIdViewModel<string>>> GetAllForDropDownAsync()
+        {
+            return _warehouses.OrderBy(x => x.Name).Select(x =>
+                new NameIdViewModel<string>(x.Id,
+                    x.Name + " " + (x.UserId.HasValue ? "(" + x.User.DisplayName + ")" : ""))).ToListAsync();
         }
     }
 }

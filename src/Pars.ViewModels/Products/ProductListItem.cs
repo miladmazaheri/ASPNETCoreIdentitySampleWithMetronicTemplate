@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -26,9 +27,11 @@ namespace Pars.ViewModels.Products
 
     public class SearchProductsViewModel
     {
+        [DisplayName("نام محصول")]
         public string Name { get; set; }
-        //public string Sort { get; set; }
+        [DisplayName("دسته بندی")]
         public string CategoryId { get; set; }
+        [DisplayName("سایز")]
         public string Size { get; set; }
 
         [Display(Name = "تعداد ردیف بازگشتی")]
@@ -37,7 +40,7 @@ namespace Pars.ViewModels.Products
         public int MaxNumberOfRows { set; get; } = 10;
 
         public int PageNumber { get; set; } = 1;
-
+        [DisplayName("انبار")]
         public string WarehouseId { get; set; }
     }
 

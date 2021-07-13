@@ -8,6 +8,7 @@ using Pars.Services.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Pars.ViewModels;
 using Pars.ViewModels.Categories;
+using Pars.ViewModels.Public;
 
 namespace Pars.Services
 {
@@ -126,9 +127,15 @@ namespace Pars.Services
             };
         }
 
+        public Task<List<NameIdViewModel<string>>> GetAllForDropDownAsync()
+        {
+            return _categories.OrderBy(x => x.Name).Select(x =>
+                new NameIdViewModel<string>(x.Id, x.Name)).ToListAsync();
+        }
+
         public Task<List<CategoryViewModel>> GetAllAsync()
         {
-            return _categories.OrderBy(x=>x.Name).Select(x => new CategoryViewModel
+            return _categories.OrderBy(x => x.Name).Select(x => new CategoryViewModel
             {
                 Id = x.Id,
                 Name = x.Name,

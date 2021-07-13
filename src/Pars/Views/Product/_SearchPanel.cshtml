@@ -1,20 +1,25 @@
-﻿@model SearchProductsViewModel
+﻿@model ProductIndexViewModel
 
 <div class="row mb-6">
     <div class="col-lg-3 mb-lg-0 mb-6">
-        <label asp-for="Name"></label>
-        <input asp-for="Name" type="text" class="form-control datatable-input" placeholder="" data-col-index="0" />
+        <label asp-for="SearchViewModel.Name"></label>
+        <input asp-for="SearchViewModel.Name" type="text" class="form-control datatable-input" placeholder="" data-col-index="0" name="@nameof(Model.SearchViewModel.Name)" />
+    </div>
+
+    <div class="col-lg-3  mb-lg-0 mb-6">
+        <label asp-for="SearchViewModel.Size"></label>
+        <input asp-for="SearchViewModel.Size" type="text" class="form-control datatable-input" placeholder="" data-col-index="1" name="@nameof(Model.SearchViewModel.Size)" />
     </div>
     <div class="col-lg-3  mb-lg-0 mb-6">
-        <label asp-for="CategoryId"></label>
-        <input asp-for="CategoryId" type="text" class="form-control datatable-input" placeholder="" data-col-index="1" />
+        <label asp-for="SearchViewModel.CategoryId"></label>
+        <select asp-for="SearchViewModel.CategoryId" asp-items="Model.Categories" class="form-control datatable-input" data-col-index="2" name="@nameof(Model.SearchViewModel.CategoryId)">
+            <option></option>
+        </select>
     </div>
     <div class="col-lg-3  mb-lg-0 mb-6">
-        <label asp-for="Size"></label>
-        <input asp-for="Size" type="text" class="form-control datatable-input" placeholder="" data-col-index="2" />
-    </div>
-    <div class="col-lg-3  mb-lg-0 mb-6">
-        <label asp-for="WarehouseId"></label>
-        <input asp-for="WarehouseId" type="text" class="form-control datatable-input" placeholder="" data-col-index="3" />
+        <label asp-for="SearchViewModel.WarehouseId"></label>
+        <select asp-for="SearchViewModel.WarehouseId" asp-items="Model.Warehouses" class="form-control datatable-input" data-col-index="3" name="@nameof(Model.SearchViewModel.WarehouseId)">
+            <option></option>
+        </select>
     </div>
 </div>

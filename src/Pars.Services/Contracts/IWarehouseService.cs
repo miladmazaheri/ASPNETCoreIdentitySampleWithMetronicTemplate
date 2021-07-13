@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Pars.ViewModels;
+using Pars.ViewModels.Public;
 using Pars.ViewModels.Warehouses;
 
 namespace Pars.Services.Contracts
@@ -19,5 +20,6 @@ namespace Pars.Services.Contracts
         Task<WarehouseViewModel> GetAsync(string id);
         Task<PagedListViewModel<WarehouseViewModel>> GetAllAsync(SearchWarehousesViewModel model);
         Task<List<WarehouseViewModel>> GetAllAsync();
+        Task<List<NameIdViewModel<string>>> GetAllForDropDownAsync();
     }
 }
