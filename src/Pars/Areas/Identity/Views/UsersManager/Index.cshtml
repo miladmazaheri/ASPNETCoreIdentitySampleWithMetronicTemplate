@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "مدیریت کاربران";
- }
+}
 
 <div class="card mt-5">
     <div class="card-header">
@@ -15,3 +15,27 @@
         <a class="btn btn-success btn-sm" asp-action="Index" asp-controller="Register">افزودن یک کاربر جدید</a>
     </footer>
 </div>
+@section Scripts
+{
+    <script>
+        new ClipboardJS('[data-clipboard=true]').on('success',
+            function(e) {
+                e.clearSelection();
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'کپی شد',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+
+            });
+
+        function generateApiKey(userId) {
+            $.get('@Url.Action("GenerateApiKey","UserCard")' +'?userId='+userId,
+                function(data) {
+                    $("#kt_clipboard_1").val(data);
+                });
+        }
+    </script>
+}
