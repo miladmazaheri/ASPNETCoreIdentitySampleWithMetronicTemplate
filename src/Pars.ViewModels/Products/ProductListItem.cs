@@ -27,7 +27,7 @@ namespace Pars.ViewModels.Products
     public class SearchProductsViewModel
     {
         public string Name { get; set; }
-        public string Sort { get; set; }
+        //public string Sort { get; set; }
         public string CategoryId { get; set; }
         public string Size { get; set; }
 

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DNTCommon.Web.Core;
 using Microsoft.AspNetCore.Mvc;
 using Pars.Services.Contracts;
+using Pars.ViewModels;
 using Pars.ViewModels.Products;
+using System.Threading.Tasks;
 
 namespace Pars.Controllers
 {
@@ -17,9 +16,30 @@ namespace Pars.Controllers
             _productService = productService;
         }
 
-        public async Task<IActionResult> Index(SearchProductsViewModel model)
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
-            return View(await _productService.GetAllAsync(model));
+            var model = new SearchProductsViewModel();
+            var result = new PagedListResult<ProductListItemViewModel, SearchProductsViewModel>
+            {
+                PagedListViewModel = await _productService.GetAllAsync(model),
+                SearchViewModel = model,
+            };
+
+            return View(result);
+        }
+
+        [AjaxOnly, HttpGet]
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+        public async Task<IActionResult> Search(SearchProductsViewModel model)
+        {
+            var result = new PagedListResult<ProductListItemViewModel, SearchProductsViewModel>
+            {
+                PagedListViewModel = await _productService.GetAllAsync(model),
+                SearchViewModel = model,
+            };
+
+            return PartialView("_Table", result);
         }
     }
 }
