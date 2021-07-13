@@ -35,9 +35,9 @@
                             <span>@item.Address</span>
                         </p>
                         <div class="d-flex justify-content-center">
-                            <button type="button" class="btn btn-primary text-uppercase font-weight-bolder px-15 py-3">
+                            <a asp-action="Index" asp-controller="Product" asp-route-warehouseId="@item.Id" asp-route-title="محتویات انبار ها" class="btn btn-primary text-uppercase font-weight-bolder px-15 py-3">
                                 مشاهده محتویات انبار
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>

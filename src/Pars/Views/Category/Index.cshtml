@@ -40,9 +40,9 @@
                             @item.Title
                         </h4>
                         <div class="d-flex justify-content-center">
-                            <button type="button" class="btn btn-primary text-uppercase font-weight-bolder px-15 py-3">
+                            <a asp-action="Index" asp-controller="Product" asp-route-categoryId="@item.Id" class="btn btn-primary text-uppercase font-weight-bolder px-15 py-3">
                                 مشاهده محصولات
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>

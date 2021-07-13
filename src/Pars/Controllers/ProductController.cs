@@ -23,8 +23,10 @@ namespace Pars.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index([FromQuery] string categoryId, [FromQuery] string warehouseId)
+        public async Task<IActionResult> Index([FromQuery] string categoryId, [FromQuery] string warehouseId, [FromQuery] string title)
         {
+            ViewBag.Title = !string.IsNullOrWhiteSpace(title) ? title : "لیست محصولات";
+
             var model = new SearchProductsViewModel() { CategoryId = categoryId, WarehouseId = warehouseId };
             var result = new ProductIndexViewModel
             {

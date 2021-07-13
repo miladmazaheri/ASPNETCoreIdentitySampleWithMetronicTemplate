@@ -1,6 +1,5 @@
 ﻿@model ProductIndexViewModel
 @{
-    ViewBag.Title = "لیست محصولات";
     Layout = "_MetronicLayout";
 }
 
@@ -62,7 +61,7 @@
                 message: 'لطفا صبر کنید...'
             });
         }
-        
+
         function dataAjaxSuccess(data, status, xhr) {
 
         }
@@ -75,6 +74,11 @@
             KTApp.unblock('#searchAndList');
             $('abbr').attr('data-toggle', 'tooltip');
             $('[data-toggle="tooltip"]').tooltip();
+        }
+    </script>
+    <script>
+        function addToBasket(productId) {
+
         }
     </script>
 }
