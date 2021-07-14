@@ -192,6 +192,7 @@ namespace Pars.DataLayer.Context
         public virtual DbSet<Order> Orders { set; get; }
         public virtual DbSet<OrderItem> OrderItems { set; get; }
         public virtual DbSet<OrderCheckout> OrderCheckouts { set; get; }
+        public virtual DbSet<OrderBasket> OrderBaskets { set; get; }
 
 
 

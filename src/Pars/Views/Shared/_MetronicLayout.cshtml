@@ -105,8 +105,8 @@
                             <!--begin::User-->
                             @if (User.Identity.IsAuthenticated)
                             {
-                                <div class="dropdown">
-                                    <partial name="_OrderBasket" />
+                                <div class="dropdown" id="basket-container">
+
                                 </div>
                                 <div class="dropdown">
                                     <partial name="_HeaderUserMenu" />
@@ -275,7 +275,15 @@
     <script src="~/metronic/assets/js/pages/widgets.js?v=7.0.6"></script>
     @*<script src="~/js/site.min.js" type="text/javascript" asp-append-version="true"></script>*@
 
+    @if (User.Identity.IsAuthenticated)
+    {
+        <script src="~/js/basket.js"></script>
+    }
+
     @await RenderSectionAsync("Scripts", required: false)
+
+
+
     <!--end::Page Scripts-->
 </body>
 <!--end::Body-->

@@ -57,5 +57,11 @@ namespace Pars.Controllers
 
             return PartialView("_Table", result);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Detail(string id)
+        {
+            return View();
+        }
     }
 }

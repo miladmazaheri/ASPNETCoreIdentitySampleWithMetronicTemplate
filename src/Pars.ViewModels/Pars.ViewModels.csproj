@@ -4,13 +4,13 @@
     <NoWarn>RCS1090</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Pars.Entities\Pars.Entities.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="DNTCommon.Web.Core" Version="2.9.2" />
     <PackageReference Include="cloudscribe.Web.Pagination" Version="3.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.7" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Pars.Entities\Pars.Entities.csproj" />
   </ItemGroup>
 </Project>

@@ -68,6 +68,7 @@ namespace Pars.IocConfig
             services.AddScoped<ICategoryService,EfCategoryService>();
             services.AddScoped<IWarehouseService,EfWarehouseService>();
             services.AddScoped<IOrderService, EfOrderService>();
+            services.AddScoped<IOrderBasketService, EfOrderBasketService>();
 
             return services;
         }
