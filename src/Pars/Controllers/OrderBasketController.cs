@@ -58,5 +58,11 @@ namespace Pars.Controllers
             var model = await _orderBasketService.GetAllAsync(userId);
             return PartialView("_OrderBasket", model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            return View();
+        }
     }
 }
