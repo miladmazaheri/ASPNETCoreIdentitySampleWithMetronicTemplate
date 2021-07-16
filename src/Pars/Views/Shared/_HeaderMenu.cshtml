@@ -1,4 +1,5 @@
-﻿<li class="menu-item" data-menu-toggle="click" aria-haspopup="true">
+﻿@using Pars.Common.Enums
+<li class="menu-item" data-menu-toggle="click" aria-haspopup="true">
     <a asp-controller="Home" asp-action="Index" asp-area="@AreaConstants.IdentityArea" class="menu-link">
         <span class="menu-text">پیشخوان</span>
     </a>
@@ -15,17 +16,17 @@
                 </a>
             </li>
             <li class="menu-item " aria-haspopup="true">
-                <a href="#" class="menu-link ">
+                <a asp-controller="Order" asp-action="Index" asp-area="" asp-route-title="لیست سفارشات جدید" asp-route-orderStatus="@OrderStatus.New.ToString()" class="menu-link ">
                     <span class="menu-text">لیست سفارشات جدید</span><span class="menu-desc"></span>
                 </a>
             </li>
             <li class="menu-item " aria-haspopup="true">
-                <a href="/#" class="menu-link ">
+                <a asp-controller="Order" asp-action="Index" asp-area="" asp-route-title="لیست سفارشات در حال تولید" asp-route-orderStatus="@OrderStatus.InProgress.ToString()" class="menu-link ">
                     <span class="menu-text">سفارشات در حال تولید</span><span class="menu-desc"></span>
                 </a>
             </li>
             <li class="menu-item " aria-haspopup="true">
-                <a href="/#" class="menu-link ">
+                <a asp-controller="Order" asp-action="Index" asp-area="" asp-route-title="لیست سفارشات تحویل شده" asp-route-orderStatus="@OrderStatus.Delivered.ToString()" class="menu-link ">
                     <span class="menu-text">سفارشات تحویل شده</span><span class="menu-desc"></span>
                 </a>
             </li>

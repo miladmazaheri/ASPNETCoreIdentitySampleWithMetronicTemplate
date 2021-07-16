@@ -4,16 +4,7 @@ using Pars.Common.Enums;
 
 namespace Pars.ViewModels.Orders
 {
-    public class SearchOrdersViewModel
-    {
-        public OrderStatus? OrderStatus { get; set; }
-        public DateTime? FromDate { get; set; }
-        public DateTime? ToDate { get; set; }
-        public int MaxNumberOfRows { set; get; }
-
-        public int PageNumber { get; set; }
-
-    }
+   
     public class OrderDto
     {
         public long Id { get; set; }

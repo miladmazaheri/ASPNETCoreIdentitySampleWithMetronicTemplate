@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 
 namespace Pars.Services.Contracts.Identity
@@ -1070,5 +1071,6 @@ namespace Pars.Services.Contracts.Identity
 
         Task<string> GenerateApiKeyAsync(int userId);
         Task<int?> GetReferralUserIdAsync(int userId);
+        Task<List<SelectListItem>> GetAllForComboAsync();
     }
 }

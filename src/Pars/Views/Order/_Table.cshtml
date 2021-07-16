@@ -1,0 +1,84 @@
+﻿@model PagedListResult<Pars.ViewModels.Orders.OrderListItemViewModel, Pars.ViewModels.Orders.SearchOrderViewModel>
+
+<table class="table table-separate table-hover table-head-custom table-vertical-center">
+    <thead>
+        <tr>
+            <th>عنوان سفارش</th>
+            <th>شناسه</th>
+            <th>تاریخ</th>
+            <th>وضعیت</th>
+            <th>عملیات</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.PagedListViewModel.Items.Any())
+        {
+            foreach (var item in Model.PagedListViewModel.Items)
+            {
+                <tr role="row" class="odd">
+                    <td class="sorting_1 dtr-control">
+                        <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center">
+                                @item.Title
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            @item.Id
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            @item.Date
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            @item.Status
+                        </div>
+                    </td>
+                    <td style="" nowrap="">
+                        <button class="btn btn-sm btn-success" type="button">
+                            مشاهده
+                        </button>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="7" class="text-center">هیچ دیتایی یافت نشد</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="">
+    <div class="col">
+        <cs-pager cs-paging-pagesize="@Model.PagedListViewModel.Paging.ItemsPerPage"
+                  cs-paging-pagenumber="@Model.PagedListViewModel.Paging.CurrentPage"
+                  cs-paging-totalitems="@Model.PagedListViewModel.Paging.TotalItems"
+                  cs-pagenumber-param="@nameof(Model.SearchViewModel.PageNumber)"
+                  cs-ajax-target="#list"
+                  asp-controller="Product"
+                  asp-action="Search"
+                  asp-route-pagesize="@Model.SearchViewModel.MaxNumberOfRows"
+                  cs-show-first-last="true"
+                  cs-suppress-empty-nextprev="false"
+                  cs-suppress-inactive-firstlast="false"
+                  cs-suppress-empty-pager="false"
+                  cs-first-page-text="ابتدا"
+                  cs-last-page-text="انتها"
+                  cs-pager-ul-class="pagination"
+                  cs-pager-li-current-class="page-item active"
+                  cs-pager-li-other-class="page-item"
+                  cs-pager-li-non-active-class="disabled"
+                  cs-pager-link-current-class="page-link"
+                  cs-pager-link-other-class="page-link"
+                  cs-ajax-begin="dataAjaxBegin"
+                  cs-ajax-success="dataAjaxSuccess"
+                  cs-ajax-failure="dataAjaxFailure"
+                  cs-ajax-complete="dataAjaxComplete"></cs-pager>
+    </div>
+</div>

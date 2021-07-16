@@ -14,6 +14,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System;
 using DNTCommon.Web.Core;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using NETCore.Encrypt;
 
 namespace Pars.Services.Identity
@@ -320,6 +321,13 @@ namespace Pars.Services.Identity
         public async Task<int?> GetReferralUserIdAsync(int userId)
         {
             return (await _users.FirstOrDefaultAsync(x => x.Id == userId))?.ReferralUserId;
+        }
+
+        public async Task<List<SelectListItem>> GetAllForComboAsync()
+        {
+            var userRoleId = (await _roles.FirstAsync(x => x.Name == ConstantRoles.User)).Id;
+            return await _users.Include(x => x.Roles).Where(x => x.Roles.Any(r => r.RoleId == userRoleId))
+                .Select(x => new SelectListItem(x.DisplayName, x.Id.ToString())).ToListAsync();
         }
 
         public async Task<PagedUsersListViewModel> GetPagedUsersListAsync(

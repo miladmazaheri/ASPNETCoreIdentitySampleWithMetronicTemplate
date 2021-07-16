@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using cloudscribe.Web.Pagination;
+using DNTPersianUtils.Core;
 using Microsoft.EntityFrameworkCore;
+using Pars.Common.Enums;
 using Pars.DataLayer.Context;
 using Pars.Entities;
 using Pars.Services.Contracts;
+using Pars.ViewModels;
 using Pars.ViewModels.Orders;
+using Pars.ViewModels.Products;
 
 namespace Pars.Services
 {
@@ -24,15 +29,22 @@ namespace Pars.Services
 
         public async Task<OrderDto> GetAsync(long orderId)
         {
-            var item = await _orders.Include(x => x.OrderItems).Include(x => x.OrderCheckouts).FirstAsync(x => x.Id == orderId);
+            var item = await _orders.Include(x => x.OrderItems).Include(x => x.OrderCheckouts)
+                .FirstAsync(x => x.Id == orderId);
 
             return MapToModel(item);
         }
 
-        public async Task<List<OrderDto>> GetAllAsync(SearchOrdersViewModel input)
+        public async Task<List<OrderDto>> GetAllAsync(SearchOrderViewModel input)
         {
-            var skipRecords = input.PageNumber * input.MaxNumberOfRows;
+            var skipRecords = (input.PageNumber - 1) * input.MaxNumberOfRows;
             var query = _orders.Include(x => x.OrderItems).Include(x => x.OrderCheckouts).AsQueryable();
+
+            if (input.UserId.HasValue)
+            {
+                query = query.Where(x => x.UserId == input.UserId.Value);
+            }
+
             if (input.OrderStatus.HasValue)
             {
                 query = query.Where(x => x.OrderStatus == input.OrderStatus.Value);
@@ -52,6 +64,45 @@ namespace Pars.Services
 
             return await query.Skip(skipRecords).Take(input.MaxNumberOfRows).Select(x => MapToModel(x)).ToListAsync();
 
+        }
+
+        public async Task<PagedListViewModel<OrderListItemViewModel>> GetAllForListAsync(SearchOrderViewModel input)
+        {
+            var skipRecords = (input.PageNumber - 1) * input.MaxNumberOfRows;
+            var query = _orders.Include(x => x.OrderItems).Include(x => x.OrderCheckouts).AsQueryable();
+
+            if (input.UserId.HasValue)
+            {
+                query = query.Where(x => x.UserId == input.UserId.Value);
+            }
+
+            if (input.OrderStatus.HasValue)
+            {
+                query = query.Where(x => x.OrderStatus == input.OrderStatus.Value);
+            }
+
+            if (input.FromDate.HasValue)
+            {
+                query = query.Where(x => x.OrderDate >= input.FromDate.Value);
+            }
+
+            if (input.ToDate.HasValue)
+            {
+                query = query.Where(x => x.OrderDate <= input.ToDate.Value);
+            }
+
+            query = query.OrderBy(x => x.Id);
+
+            return new PagedListViewModel<OrderListItemViewModel>
+            {
+                Paging = new PaginationSettings()
+                {
+                    TotalItems = await query.CountAsync(),
+                    CurrentPage = input.PageNumber,
+                    ItemsPerPage = input.MaxNumberOfRows,
+                },
+                Items = await query.Skip(skipRecords).Take(input.MaxNumberOfRows).Select(x => MapToListModel(x)).ToListAsync()
+            };
         }
 
         private static OrderDto MapToModel(Order item)
@@ -100,6 +151,17 @@ namespace Pars.Services
                     ReferenceNumber = x.ReferenceNumber,
                 }).ToList()
 
+            };
+        }
+
+        private static OrderListItemViewModel MapToListModel(Order item)
+        {
+            return new OrderListItemViewModel
+            {
+                Id = $"{item.Id:000000}",
+                Date = item.OrderDate.ToShortPersianDateString(),
+                Status = item.OrderStatus.GetName(),
+                Title = item.Title
             };
         }
     }

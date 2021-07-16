@@ -1,0 +1,79 @@
+﻿@model Pars.ViewModels.Orders.OrderIndexViewModel
+@{
+    Layout = "_MetronicLayout";
+}
+
+<div class="card card-custom">
+    <div class="card-header">
+        <div class="card-title">
+            <span class="card-icon"><i class="flaticon2-delivery-package text-primary"></i></span>
+            <h3 class="card-label">@ViewBag.Title</h3>
+        </div>
+
+    </div>
+    <div class="card-body" id="searchAndList">
+        <form class="kt-form kt-form--fit mb-15"
+              method="get"
+              asp-area=""
+              asp-controller="Order"
+              asp-action="Search"
+              role="form"
+              data-ajax="true"
+              data-ajax-loading="#Progress"
+              data-ajax-begin="dataAjaxBegin"
+              data-ajax-success="dataAjaxSuccess"
+              data-ajax-failure="dataAjaxFailure"
+              data-ajax-complete="dataAjaxComplete"
+              data-ajax-update="#list">
+            <partial name="_SearchPanel" model="Model" />
+            <div class="row mt-8">
+                <div class="col-lg-12">
+                    <button class="btn btn-primary btn-primary--icon" type="submit">
+                        <span>
+                            <i class="la la-search"></i>
+                            <span>جستجو</span>
+                        </span>
+                    </button> &nbsp;&nbsp;
+                    <button class="btn btn-secondary btn-secondary--icon" type="reset">
+                        <span>
+                            <i class="la la-close"></i>
+                            <span>ریست</span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div class="table-responsive" id="list">
+                <partial name="_Table" model="Model" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/lib/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.min.js"></script>
+    <script type="text/javascript">
+        function dataAjaxBegin(xhr) {
+            //$('#list').empty();
+            KTApp.block('#searchAndList', {
+                overlayColor: '#000000',
+                state: 'danger',
+                message: 'لطفا صبر کنید...'
+            });
+        }
+
+        function dataAjaxSuccess(data, status, xhr) {
+
+        }
+
+        function dataAjaxFailure(xhr, status, error) {
+
+        }
+
+        function dataAjaxComplete(xhr, status) {
+            KTApp.unblock('#searchAndList');
+            $('abbr').attr('data-toggle', 'tooltip');
+            $('[data-toggle="tooltip"]').tooltip();
+        }
+    </script>
+}

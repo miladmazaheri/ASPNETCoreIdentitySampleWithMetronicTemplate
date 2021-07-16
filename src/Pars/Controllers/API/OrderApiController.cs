@@ -25,9 +25,9 @@ namespace Pars.Controllers.API
         {
             return new(new List<NameIdViewModel<int>>()
             {
-                new((int)OrderStatus.New,"سفارشات جدید"),
-                new((int)OrderStatus.InProgress,"سفارشات در حال تولید"),
-                new((int)OrderStatus.Delivered,"سفارشات تحویل شده"),
+                new((int)OrderStatus.New,OrderStatus.New.GetName()),
+                new((int)OrderStatus.InProgress,OrderStatus.InProgress.GetName()),
+                new((int)OrderStatus.Delivered,OrderStatus.Delivered.GetName()),
             });
         }
 
@@ -38,7 +38,7 @@ namespace Pars.Controllers.API
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<OrderDto>>> GetAllAsync([FromQuery]SearchOrdersViewModel input)
+        public async Task<ActionResult<List<OrderDto>>> GetAllAsync([FromQuery]SearchOrderViewModel input)
         {
             return new ActionResult<List<OrderDto>> (await _orderService.GetAllAsync(input));
         }
