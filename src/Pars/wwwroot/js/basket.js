@@ -53,11 +53,8 @@ function increaseBasketItem(productId) {
         });
 }
 
-function submitBasket() {
-    document.location = '/orderbasket/submit';
-}
 
-function clearBasket() {
+function clearBasket(reloadLocation=false) {
     $.get('/orderbasket/clear')
         .done(function (data) {
             Swal.fire({
@@ -68,6 +65,9 @@ function clearBasket() {
                 showConfirmButton: false,
                 timer: 1000
             });
+            if (reloadLocation || window.location.href.toLowerCase().indexOf("orderbasket") > -1) {
+                location.reload();
+            }
             updateOrderCard(data);
         }).fail(function () {
             Swal.fire({

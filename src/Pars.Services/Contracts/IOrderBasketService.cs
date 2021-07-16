@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Pars.Entities;
+using Pars.ViewModels.Orders;
 
 namespace Pars.Services.Contracts
 {
@@ -14,5 +15,6 @@ namespace Pars.Services.Contracts
         Task RemoveAsync(int userId, Guid id);
         Task ClearAsync(int userId);
         Task<List<OrderBasket>> GetAllAsync(int userId);
+        Task<List<SubmitOrderItemDto>> GetAllForSubmitAsync(int userId);
     }
 }

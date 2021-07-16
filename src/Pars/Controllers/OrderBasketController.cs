@@ -7,6 +7,7 @@ using DNTCommon.Web.Core;
 using Microsoft.AspNetCore.Authorization;
 using Pars.Services.Contracts;
 using Pars.ViewModels.OrderBaskets;
+using Pars.ViewModels.Orders;
 
 namespace Pars.Controllers
 {
@@ -62,7 +63,9 @@ namespace Pars.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return View();
+            var userId = User.Identity.GetUserId<int>();
+            var model = await _orderBasketService.GetAllForSubmitAsync(userId);
+            return View(model);
         }
     }
 }

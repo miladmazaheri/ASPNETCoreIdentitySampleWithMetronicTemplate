@@ -39,8 +39,8 @@ namespace Pars.ViewModels.Orders
         public int UserId { get; set; }
         public int? ReferralUserId { get; set; }
 
-        public List<OrderItemDto> OrderItems{ get; set; }
-        public List<OrderCheckoutDto> OrderCheckouts{ get; set; }
+        public List<OrderItemDto> OrderItems { get; set; }
+        public List<OrderCheckoutDto> OrderCheckouts { get; set; }
     }
 
     public class OrderItemDto
@@ -57,7 +57,14 @@ namespace Pars.ViewModels.Orders
         public long TotalPurePrice { get; set; }
     }
 
-    public class OrderCheckoutDto 
+    public class SubmitOrderItemDto : OrderItemDto
+    {
+        public string Name { get; set; }
+        public string PictureAddress { get; set; }
+    }
+
+
+    public class OrderCheckoutDto
     {
         public long Id { get; set; }
         public DateTime DateTime { get; set; }

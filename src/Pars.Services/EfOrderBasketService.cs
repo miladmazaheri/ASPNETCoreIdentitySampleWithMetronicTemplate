@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Pars.DataLayer.Context;
 using Pars.Entities;
 using Pars.Services.Contracts;
+using Pars.ViewModels.Orders;
 using Z.BulkOperations;
 
 namespace Pars.Services
@@ -89,6 +90,31 @@ namespace Pars.Services
         public Task<List<OrderBasket>> GetAllAsync(int userId)
         {
             return _orderBaskets.Where(x => x.UserId == userId).OrderBy(x => x.CreationDate).ToListAsync();
+        }
+
+        public async Task<List<SubmitOrderItemDto>> GetAllForSubmitAsync(int userId)
+        {
+            var data = await (from o in _orderBaskets.Where(x => x.UserId == userId)
+                              join p in _products on o.ProductId equals p.Id
+                              select new SubmitOrderItemDto
+                              {
+                                  Count = o.Count,
+                                  Name = p.Name,
+                                  PictureAddress = p.Picture,
+                                  ProductId = p.Id,
+                                  UnitPrice = p.Price,
+                              }).ToListAsync();
+
+            data.ForEach(item =>
+            {
+                item.Discount = 0;
+                item.DiscountPercent = 0;
+                item.TotalPrice = item.UnitPrice * item.Count;
+                item.TaxPrice = (long)Math.Round(item.TotalPrice * 0.09);
+                item.TotalPurePrice = item.TotalPrice + item.TaxPrice - item.Discount;
+            });
+
+            return data;
         }
     }
 }
