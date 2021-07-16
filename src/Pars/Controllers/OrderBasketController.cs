@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DNTCommon.Web.Core;
 using Microsoft.AspNetCore.Authorization;
+using Pars.Common.Enums;
 using Pars.Services.Contracts;
 using Pars.ViewModels.OrderBaskets;
 using Pars.ViewModels.Orders;
@@ -66,6 +67,15 @@ namespace Pars.Controllers
             var userId = User.Identity.GetUserId<int>();
             var model = await _orderBasketService.GetAllForSubmitAsync(userId);
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Submit()
+        {
+            var userId = User.Identity.GetUserId<int>();
+            await _orderBasketService.SubmitAsync(userId);
+            await _orderBasketService.ClearAsync(userId);
+            return RedirectToAction("Index", "Order", new { OrderStatus = OrderStatus.New });
         }
     }
 }

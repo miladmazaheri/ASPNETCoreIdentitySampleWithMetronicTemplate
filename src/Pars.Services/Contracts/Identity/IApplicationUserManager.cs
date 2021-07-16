@@ -1069,5 +1069,6 @@ namespace Pars.Services.Contracts.Identity
         #endregion
 
         Task<string> GenerateApiKeyAsync(int userId);
+        Task<int?> GetReferralUserIdAsync(int userId);
     }
 }

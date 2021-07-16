@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DNTPersianUtils.Core;
 using Microsoft.EntityFrameworkCore;
+using Pars.Common.Enums;
 using Pars.DataLayer.Context;
 using Pars.Entities;
 using Pars.Services.Contracts;
+using Pars.Services.Contracts.Identity;
 using Pars.ViewModels.Orders;
 using Z.BulkOperations;
 
@@ -17,12 +20,16 @@ namespace Pars.Services
         private readonly IUnitOfWork _uow;
         private readonly DbSet<OrderBasket> _orderBaskets;
         private readonly DbSet<Product> _products;
+        private readonly DbSet<Order> _orders;
+        private readonly IApplicationUserManager _applicationUserManager;
 
-        public EfOrderBasketService(IUnitOfWork uow)
+        public EfOrderBasketService(IUnitOfWork uow, IApplicationUserManager applicationUserManager)
         {
             _uow = uow;
+            _applicationUserManager = applicationUserManager;
             _orderBaskets = uow.Set<OrderBasket>();
             _products = uow.Set<Product>();
+            _orders = uow.Set<Order>();
         }
 
         public async Task AddAsync(int userId, string productId, int count = 1)
@@ -116,6 +123,39 @@ namespace Pars.Services
             });
 
             return data;
+        }
+
+        public async Task SubmitAsync(int userId)
+        {
+            if (!await _orderBaskets.AnyAsync(x => x.UserId == userId)) return;
+            var refUserId = await _applicationUserManager.GetReferralUserIdAsync(userId);
+            var order = new Order
+            {
+                OrderDate = DateTime.Now,
+                OrderStatus = OrderStatus.New,
+                ReferralUserId = refUserId,
+                UserId = userId,
+                Title = $"سفارش تاریخ {DateTime.Now.ToShortPersianDateTimeString()}",
+                OrderItems = (await GetAllForSubmitAsync(userId)).Select(x => new OrderItem
+                {
+                    Count = x.Count,
+                    Discount = x.Discount,
+                    DiscountPercent = x.DiscountPercent,
+                    ProductId = x.ProductId,
+                    TaxPrice = x.TaxPrice,
+                    TotalPrice = x.TotalPrice,
+                    TotalPurePrice = x.TotalPurePrice,
+                    UnitPrice = x.UnitPrice,
+                }).ToList(),
+            };
+            order.TotalPrice = order.OrderItems.Sum(x => x.TotalPrice);
+            order.DiscountPrice = order.OrderItems.Sum(x => x.Discount);
+            order.TaxPrice = order.OrderItems.Sum(x => x.TaxPrice);
+            order.PurePrice = order.OrderItems.Sum(x => x.TotalPurePrice);
+
+            await _orders.AddAsync(order);
+            await _uow.SaveChangesAsync();
+
         }
     }
 }

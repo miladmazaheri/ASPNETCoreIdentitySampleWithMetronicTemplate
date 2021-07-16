@@ -317,6 +317,11 @@ namespace Pars.Services.Identity
             return apiKey;
         }
 
+        public async Task<int?> GetReferralUserIdAsync(int userId)
+        {
+            return (await _users.FirstOrDefaultAsync(x => x.Id == userId))?.ReferralUserId;
+        }
+
         public async Task<PagedUsersListViewModel> GetPagedUsersListAsync(
             int pageNumber, int recordsPerPage,
             string sortByField, SortOrder sortOrder,

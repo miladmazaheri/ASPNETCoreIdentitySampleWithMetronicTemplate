@@ -16,5 +16,6 @@ namespace Pars.Services.Contracts
         Task ClearAsync(int userId);
         Task<List<OrderBasket>> GetAllAsync(int userId);
         Task<List<SubmitOrderItemDto>> GetAllForSubmitAsync(int userId);
+        Task SubmitAsync(int userId);
     }
 }
