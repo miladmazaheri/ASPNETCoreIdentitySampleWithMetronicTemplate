@@ -61,6 +61,7 @@ namespace Pars.ViewModels.Orders
     {
         public string Name { get; set; }
         public string PictureAddress { get; set; }
+        public Guid OrderBasketId { get; set; }
     }
 
 

@@ -25,20 +25,26 @@
                                     <th class="text-right pr-0 font-weight-bold text-muted text-uppercase">مالیات و عوارض</th>
                                     <th class="text-right pr-0 font-weight-bold text-muted text-uppercase">تخفیف</th>
                                     <th class="text-right pr-0 font-weight-bold text-muted text-uppercase">مبلغ خالص</th>
+                                    <th class="text-right pr-0 font-weight-bold text-muted text-uppercase">عملیات</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                    <tr class="font-weight-boldest font-size-lg">
-                                        <td class="pl-0 pt-7"><a asp-action="Detail" asp-controller="Product" asp-route-id="@item.ProductId" asp- taget="_blank">@item.Name</a></td>
-                                        <td class="text-right pt-7">@item.Count</td>
-                                        <td class="text-right pt-7">@item.UnitPrice.ToString("N0") </td>
-                                        <td class="pr-0 pt-7 text-right">@item.TotalPrice.ToString("N0")</td>
-                                        <td class="text-danger pr-0 pt-7 text-right">@item.TaxPrice.ToString("N0")</td>
-                                        <td class="text-success pr-0 pt-7 text-right">@item.Discount.ToString("N0")</td>
-                                        <td class="text-primary pr-0 pt-7 text-right">@item.TotalPurePrice.ToString("N0")</td>
-                                    </tr>
+                                <tr class="font-weight-boldest font-size-lg">
+                                    <td class="pl-0 pt-7"><a asp-action="Detail" asp-controller="Product" asp-route-id="@item.ProductId" asp- taget="_blank">@item.Name</a></td>
+                                    <td class="text-right pt-7">
+                                        <button type="button" class="btn btn-xs btn-light-success btn-icon" onclick="increaseBasketItem(@item.ProductId)"><i class="ki ki-plus icon-xs"></i></button>
+                                        <span class="font-weight-bold mr-2 text-dark-75 font-size-lg align-center">@item.Count</span>
+                                        <button type="button" class="btn btn-xs btn-light-success btn-icon mr-2" onclick="decreaseBasketItem(@item.ProductId)"><i class="ki ki-minus icon-xs"></i></button>
+                                    </td>
+                                    <td class="text-right pt-7">@item.UnitPrice.ToString("N0") </td>
+                                    <td class="pr-0 pt-7 text-right">@item.TotalPrice.ToString("N0")</td>
+                                    <td class="text-danger pr-0 pt-7 text-right">@item.TaxPrice.ToString("N0")</td>
+                                    <td class="text-success pr-0 pt-7 text-right">@item.Discount.ToString("N0")</td>
+                                    <td class="text-primary pr-0 pt-7 text-right">@item.TotalPurePrice.ToString("N0")</td>
+                                    <td class="text-right pr-0 pt-7"><button class="btn btn-danger btn-sm align-center" type="button" onclick="removeBasketItem('@item.OrderBasketId')">حذف</button></td>
+                                </tr>
                                 }
                             </tbody>
                         </table>

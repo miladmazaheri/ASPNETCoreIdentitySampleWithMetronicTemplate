@@ -103,6 +103,7 @@ namespace Pars.Services
                                   PictureAddress = p.Picture,
                                   ProductId = p.Id,
                                   UnitPrice = p.Price,
+                                  OrderBasketId = o.Id
                               }).ToListAsync();
 
             data.ForEach(item =>

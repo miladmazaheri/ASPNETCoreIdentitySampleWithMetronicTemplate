@@ -17,7 +17,11 @@ function decreaseBasketItem(productId) {
                 showConfirmButton: false,
                 timer: 1000
             });
-            updateOrderCard(data);
+            if (window.location.href.toLowerCase().indexOf("orderbasket") > -1) {
+                location.reload();
+            } else {
+                updateOrderCard(data);
+            }
         }).fail(function () {
             Swal.fire({
                 position: 'top',
@@ -40,7 +44,11 @@ function increaseBasketItem(productId) {
                 showConfirmButton: false,
                 timer: 1000
             });
-            updateOrderCard(data);
+            if (window.location.href.toLowerCase().indexOf("orderbasket") > -1) {
+                location.reload();
+            } else {
+                updateOrderCard(data);
+            }
         }).fail(function () {
             Swal.fire({
                 toast: true,
@@ -53,8 +61,35 @@ function increaseBasketItem(productId) {
         });
 }
 
+function removeBasketItem(id) {
+    $.get('/orderbasket/remove', { id })
+        .done(function (data) {
+            Swal.fire({
+                toast: true,
+                position: 'top',
+                icon: 'success',
+                title: 'حذف شد',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            if (window.location.href.toLowerCase().indexOf("orderbasket") > -1) {
+                location.reload();
+            } else {
+                updateOrderCard(data);
+            }
+        }).fail(function () {
+            Swal.fire({
+                toast: true,
+                position: 'top',
+                icon: 'error',
+                title: 'خطایی در ارسال اطلاعات به سرور رخ داده است',
+                showConfirmButton: false,
+                timer: 1000
+            });
+        });
+}
 
-function clearBasket(reloadLocation=false) {
+function clearBasket() {
     $.get('/orderbasket/clear')
         .done(function (data) {
             Swal.fire({
@@ -65,10 +100,11 @@ function clearBasket(reloadLocation=false) {
                 showConfirmButton: false,
                 timer: 1000
             });
-            if (reloadLocation || window.location.href.toLowerCase().indexOf("orderbasket") > -1) {
+            if (window.location.href.toLowerCase().indexOf("orderbasket") > -1) {
                 location.reload();
+            } else {
+                updateOrderCard(data);
             }
-            updateOrderCard(data);
         }).fail(function () {
             Swal.fire({
                 position: 'top',
@@ -79,6 +115,8 @@ function clearBasket(reloadLocation=false) {
             });
         });
 }
+
+
 
 function getBasket() {
     $.get('/orderbasket/card')
