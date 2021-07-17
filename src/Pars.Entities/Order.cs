@@ -43,6 +43,8 @@ namespace Pars.Entities
         public int? ReferralUserId { get; set; }
         public User ReferralUser { get; set; }
 
+        public bool? IsConfirmed { get; set; }
+
         public virtual ICollection<OrderItem> OrderItems { get; set; }
         public virtual ICollection<OrderCheckout> OrderCheckouts { get; set; }
 

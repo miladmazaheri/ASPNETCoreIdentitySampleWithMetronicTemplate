@@ -12,5 +12,6 @@ namespace Pars.ViewModels.Orders
         public string Id { get; set; }
         public string Date { get; set; }
         public string Status { get; set; }
+        public bool? IsConfirmed { get; set; }
     }
 }

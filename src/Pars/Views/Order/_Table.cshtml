@@ -36,6 +36,20 @@
                     <td>
                         <div class="d-flex align-items-center">
                             @item.Status
+                            @{
+                                if (!item.IsConfirmed.HasValue)
+                                {
+                                    <span class="text-warning">(در انتظار تایید)</span>
+                                }
+                                else if (item.IsConfirmed == true)
+                                {
+                                    <span class="text-success">(تایید شده)</span>
+                                }
+                                else
+                                {
+                                    <span class="text-danger">(تایید نشده)</span>
+                                }
+                            }
                         </div>
                     </td>
                     <td style="" nowrap="">

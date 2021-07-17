@@ -91,7 +91,7 @@ namespace Pars.Services
                 query = query.Where(x => x.OrderDate <= input.ToDate.Value);
             }
 
-            query = query.OrderBy(x => x.Id);
+            query = query.OrderByDescending(x => x.Id);
 
             return new PagedListViewModel<OrderListItemViewModel>
             {
@@ -126,6 +126,7 @@ namespace Pars.Services
                 TaxPrice = item.TaxPrice,
                 Title = item.Title,
                 TotalPrice = item.TotalPrice,
+                IsConfirmed = item.IsConfirmed,
 
                 OrderItems = item.OrderItems?.Select(x => new OrderItemDto
                 {
@@ -161,7 +162,8 @@ namespace Pars.Services
                 Id = $"{item.Id:000000}",
                 Date = item.OrderDate.ToShortPersianDateString(),
                 Status = item.OrderStatus.GetName(),
-                Title = item.Title
+                Title = item.Title,
+                IsConfirmed = item.IsConfirmed
             };
         }
     }

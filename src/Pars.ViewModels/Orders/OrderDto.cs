@@ -30,6 +30,8 @@ namespace Pars.ViewModels.Orders
         public int UserId { get; set; }
         public int? ReferralUserId { get; set; }
 
+        public bool? IsConfirmed { get; set; }
+
         public List<OrderItemDto> OrderItems { get; set; }
         public List<OrderCheckoutDto> OrderCheckouts { get; set; }
     }
