@@ -61,7 +61,7 @@ namespace Pars.Controllers
         [HttpGet]
         public async Task<IActionResult> Detail(string id)
         {
-            return View();
+            return View(await _productService.GetAsync(id));
         }
     }
 }

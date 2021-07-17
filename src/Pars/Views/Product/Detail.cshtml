@@ -1,0 +1,132 @@
+﻿@model ProductViewModel
+<div class="row mb-5">
+    <div class="col-md-6 col-sm-12 rounded">
+        @if (!string.IsNullOrWhiteSpace(Model.Picture))
+        {
+            <img src="@Model.Picture" onerror="this.src = '~/images/product.jpg'" class="img-fluid rounded center-block" >
+        }
+        else
+        {
+            <img src="~/images/product.jpg" class="img-fluid rounded center-block"  >
+        }
+    </div>
+    <div class="col-md-6 col-sm-12">
+        <div class="card card-custom" style="height: 100%">
+            <div class="card-header">
+                <div class="card-title">
+                    <h3 class="card-label">
+                        <b>@Model.Name</b>
+                        <small>@Model.CategoryName</small>
+                    </h3>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <tbody>
+                        <tr>
+                            <td class="text-weight-bold" style="width: 20%">
+                                مواد اولیه
+                            </td>
+                            <td>
+                                @Model.Material
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-weight-bold">
+                                کاربرد
+                            </td>
+                            <td>
+                                @Model.Usage
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-weight-bold">
+                                انداره هر شاخه
+                            </td>
+                            <td>
+                                @Model.BranchSize
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-weight-bold">
+                                رنگ
+                            </td>
+                            <td>
+                                @Model.Color
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-weight-bold">
+                                ضخامت
+                            </td>
+                            <td>
+                                @Model.Thickness
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-weight-bold">
+                                سایز
+                            </td>
+                            <td>
+                                @Model.Size
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-weight-bold">
+                                تعداد در کارتن
+                            </td>
+                            <td>
+                                @Model.CountInBox
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-weight-bold">
+                                وزن هر کارتن
+                            </td>
+                            <td>
+                                @Model.BoxWeight
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-weight-bold">
+                                روش نصب
+                            </td>
+                            <td>
+                                @Model.InstallationMethod
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-weight-bold">
+                                خصوصیات
+                            </td>
+                            <td>
+                                @Model.Specification
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card card-custom">
+            <div class="card-header">
+                <div class="card-title">
+                    <h3 class="card-label">
+                        توضیحات
+                    </h3>
+                </div>
+            </div>
+            <div class="card-body">
+                @Model.Description
+            </div>
+        </div>
+    </div>
+</div>
