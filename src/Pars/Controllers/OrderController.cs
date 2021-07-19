@@ -73,7 +73,12 @@ namespace Pars.Controllers
             return PartialView("_Table", result);
         }
 
-
+        [HttpGet]
+        public async Task<IActionResult> Detail(long id)
+        {
+            var model = await _orderService.GetAsync(id);
+            return View(model);
+        }
 
     }
 }
