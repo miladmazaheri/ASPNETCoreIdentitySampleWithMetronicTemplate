@@ -20,19 +20,21 @@
                 <tr role="row" class="odd">
                     <td class="sorting_1 dtr-control">
                         <div class="d-flex align-items-center">
-                            <div class="symbol symbol-50 flex-shrink-0">
-                                @if (!string.IsNullOrWhiteSpace(item.Picture))
-                                {
-                                    <img src="@item.Picture" onerror="this.src = '~/metronic/assets/media/products/product.svg'" style="width: 50px; height: 50px;">
-                                }
-                                else
-                                {
-                                    <img src="~/metronic/assets/media/products/product.svg" style="width: 50px; height: 50px;">
-                                }
-                            </div>
-                            <div class="ml-3">
-                                <span class="text-dark-75 font-weight-bold line-height-sm d-block pb-2">@item.Name</span>
-                            </div>
+                           
+                                <div class="symbol symbol-50 flex-shrink-0">
+                                    @if (!string.IsNullOrWhiteSpace(item.Picture))
+                                    {
+                                        <img src="@item.Picture" onerror="this.src = '/metronic/assets/media/products/product.svg'" style="width: 50px; height: 50px;">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/metronic/assets/media/products/product.svg" style="width: 50px; height: 50px;">
+                                    }
+                                </div>
+                                <div class="ml-3">
+                                    <span class="text-dark-75 font-weight-bold line-height-sm d-block pb-2"> <a asp-action="Detail" asp-controller="Product" asp-route-id="@item.Id">@item.Name </a></span>
+                                </div>
+                           
                         </div>
                     </td>
                     <td>
